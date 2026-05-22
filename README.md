@@ -37,7 +37,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## follow along with used commands
 
-### used commands
+### Used commands for this project
 
 1. In terminal
 
@@ -65,9 +65,23 @@ select `Claude Code`
 type `claude` in terminal.
 `shift+tab` to cycle and choose `plan mode on`
 
+### add basic feature
+
 create folder called 'resources' and 'prompts"
 
 copy content from 01-research-and-build.md and paste your informaiton in claude
 <your info example>
 my name is Jenny Park. my linkedin: https://www.linkedin.com/in/jennypark7/, my github: https://github.com/jinyeong-park?tab=repositories and currently working on jynlab.com and admade.com, location: San Jose, CA, email: byjennypark@gmail.com
 add your photo in public/me.png
+
+check the output in localhost.
+
+### add animation feature
+
+if you like it, copy prompt from 02-streaming-and-reveal.md from resources/prompts folder.
+
+check the output in localhost.
+
+### add Q&A feature
+
+if you like it, copy prompt from 03-chat-qa.md from resources/prompts folder.

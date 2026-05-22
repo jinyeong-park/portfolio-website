@@ -28,3 +28,18 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-mono), monospace;
 }
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: cursor-blink 1s step-start infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-blink {
+    animation: none;
+  }
+}
