@@ -23,6 +23,43 @@ Go to [skills.sh](https://www.skills.sh/?q=next) to find Next.js related skillse
 Launch Claude in your terminal, then use `Shift + Tab` to cycle through modes and select:
 * **Mode:** `plan mode on`
 
+
+
+# How to Deploy on GitHub Pages
+
+**Live URL:** `https://<your-github-username>.github.io/portfolio-website`
+
+This is a Next.js app, not a plain HTML file — the browser can't read `.tsx` directly. A build step is required, which is handled automatically via GitHub Actions on every `git push`.
+
+## One-time setup (do this once per repo)
+
+1. Go to your repository on GitHub
+2. **Settings → Pages → Source** → select **GitHub Actions** and save
+
+That's it. The workflow file at `.github/workflows/deploy.yml` handles the rest.
+
+## How deployment works
+
+Every time you push to `main`, GitHub Actions automatically:
+1. Installs dependencies (`npm install`)
+2. Builds a static export (`npm run build` → outputs to `out/`)
+3. Deploys the `out/` folder to GitHub Pages
+
+## Known gotchas
+
+| Issue | Fix applied |
+|-------|-------------|
+| `npm ci` fails with `Invalid Version` error | Use `npm install` instead — `package-lock.json` version format conflicts with newer npm |
+| Node.js 20 deprecation warning on actions | Set `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true` in workflow env |
+| `next/image` not working on static export | Set `images: { unoptimized: true }` in `next.config.ts` |
+| Page not found at root URL | Set `basePath: '/portfolio-website'` in `next.config.ts` |
+
+## Monitor deployments
+
+Check live status at:
+`https://github.com/<your-github-username>/portfolio-website/actions`
+
+
 ---
 
 ## 🚀 Feature Implementation Steps (Features)
