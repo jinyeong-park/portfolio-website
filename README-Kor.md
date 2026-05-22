@@ -57,3 +57,14 @@ npx create-next-app@latest .
 
 - `resources/prompts/03-chat-qa.md` 파일의 프롬프트를 복사하여 Claude에게 요청합니다.
 - **확인:** 최종적으로 `localhost`에서 Q&A 기능이 인터랙티브하게 작동하는지 테스트합니다.
+
+
+
+### 배포 방법                                     
+                                                            
+❯ 1. jinyeong-park.github.io
+    루트 GitHub Pages — 리포지토리 이름을 jinyeong-park.github.io로 바꿔야 합니다. 가장 깔끔한 URL.
+  2. jinyeong-park.github.io/portfolio-website
+    현재 리포지토리 이름 그대로 사용. 리포 이름 변경 없이 바로 배포 가능.                          
+  3. 커스텀 도메인 (e.g. jynlab.com)                              
+    커스텀 도메인 연결. CNAME 파일 추가 + DNS 설정 필요.
