@@ -1,3 +1,56 @@
+# 💻 Portfolio Website Development Log
+
+This document serves as a guide recording the process of building a portfolio website using `Next.js` and `Claude Code`.
+
+---
+
+## 🛠️ Project Setup & Commands (Used Commands)
+
+### 1. Initialize Next.js Project
+Run the following command in your terminal within the directory where you want to create the project:
+npx create-next-app@latest .
+
+### 2. Install Skills (skills.sh)
+Go to [skills.sh](https://www.skills.sh/?q=next) to find Next.js related skillsets. Copy the commands and select **Claude Code** as your environment.
+
+* **Add `next-best-practices` skill**
+  npx skills add https://github.com/vercel-labs/next-skills --skill next-best-practices
+  
+* **Add `frontend-design` skill**
+  npx skills add https://github.com/anthropics/skills --skill frontend-design
+
+### 3. AI Collaboration Setup
+Launch Claude in your terminal, then use `Shift + Tab` to cycle through modes and select:
+* **Mode:** `plan mode on`
+
+---
+
+## 🚀 Feature Implementation Steps (Features)
+
+### 📂 Initial Environment Setup
+1. Create a `resources` folder and a `resources/prompts` folder in the project root directory.
+2. Add your profile photo to the `public/me.png` path.
+
+### Step 1: Add Basic Feature
+Copy the prompt content from `01-research-and-build.md` and paste your personal information to provide context for Claude.
+
+> 📝 **Personal Info Example:**
+> "My name is Jenny Park. My LinkedIn: https://www.linkedin.com/in/jennypark7/, My GitHub: https://github.com/jinyeong-park?tab=repositories. Currently working on jynlab.com and admade.com. Location: San Jose, CA. Email: byjennypark@gmail.com"
+
+* **Verify:** Check the output on `localhost` once the build is complete.
+
+### Step 2: Add Animation Feature
+If you like the basic layout, enhance the user experience by adding animations.
+* Copy the prompt from `resources/prompts/02-streaming-and-reveal.md` and pass it to Claude.
+* **Verify:** Check `localhost` to ensure the streaming and reveal animations work smoothly.
+
+### Step 3: Add Chat Q&A Feature
+Incorporate an interactive chat component to engage with visitors.
+* Copy the prompt from `resources/prompts/03-chat-qa.md` and pass it to Claude.
+* **Verify:** Test the Q&A feature locally on `localhost` to ensure complete interactivity.
+
+---------------------------------------------------------------------------
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
@@ -34,54 +87,3 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## follow along with used commands
-
-### Used commands for this project
-
-1. In terminal
-
-```
-npx create-next-app@latest .
-```
-
-2. Download some skills(`next-best-practices` and `frontend-design`) from skills.sh about next
-   https://www.skills.sh/?q=next
-
-click `next-best-practices`
-copy the command and run it in terminal
-npx skills add https://github.com/vercel-labs/next-skills --skill next-best-practices
-
-select `Claude Code`
-
-click `frontend-design`
-copy the command and run it in terminal
-npx skills add https://github.com/anthropics/skills --skill frontend-design
-
-select `Claude Code`
-
---
-
-type `claude` in terminal.
-`shift+tab` to cycle and choose `plan mode on`
-
-### add basic feature
-
-create folder called 'resources' and 'prompts"
-
-copy content from 01-research-and-build.md and paste your informaiton in claude
-<your info example>
-my name is Jenny Park. my linkedin: https://www.linkedin.com/in/jennypark7/, my github: https://github.com/jinyeong-park?tab=repositories and currently working on jynlab.com and admade.com, location: San Jose, CA, email: byjennypark@gmail.com
-add your photo in public/me.png
-
-check the output in localhost.
-
-### add animation feature
-
-if you like it, copy prompt from 02-streaming-and-reveal.md from resources/prompts folder.
-
-check the output in localhost.
-
-### add Q&A feature
-
-if you like it, copy prompt from 03-chat-qa.md from resources/prompts folder.

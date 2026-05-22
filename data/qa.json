@@ -1,0 +1,90 @@
+[
+  {
+    "patterns": ["hello|hi|hey|sup|greetings|howdy"],
+    "answer": "Hey! I'm Jenny's terminal. Ask me about her background, projects, skills, or how to get in touch. Try: \"what are you building?\" or \"how do I hire you?\""
+  },
+  {
+    "patterns": ["who are you|tell me about yourself|introduce yourself|what's your story"],
+    "answer": "I'm Jenny Park — a PM and indie builder based in San Jose, CA. I operate at the intersection of performance marketing and AI-native product engineering. I write PRDs in the morning, review funnels in the afternoon, and ship an AI tool by evening. Currently building JYNLAB."
+  },
+  {
+    "patterns": ["looking for a job|open to work|job search|seeking|employment|hiring|full.time|new role|new job|is she available"],
+    "answer": "For the right opportunity — absolutely. Connect on LinkedIn at linkedin.com/in/jennypark7 or email byjennypark@gmail.com. She'd love to hear what you're building."
+  },
+  {
+    "patterns": ["projects|what are you building|current projects|what are you doing currently|portfolio"],
+    "answer": "Current: JYNLAB (live at jynlab.com), ADMADE (in dev). Recent tools: funnellens, qrefiner, pm-prd-generator, ai-prompt-for-pm. I tend to build things that solve problems I have as a PM and then open-source or productize them."
+  },
+  {
+    "patterns": ["is she working|currently working|what is she doing|what is she working on|is she employed|what's she up to"],
+    "answer": "She's building JYNLAB and ADMADE, plus a handful of other interesting projects. Always shipping something."
+  },
+  {
+    "patterns": ["what do you do|your role|current role|day.to.day|job"],
+    "answer": "Product Manager who also ships code. That means defining strategy and roadmap on one side, then actually building the tools I spec out. I've driven paid growth campaigns, written stacks of PRDs, and lately I've been rapid-prototyping with Claude Code and the OpenAI stack."
+  },
+  {
+    "patterns": ["tech stack|technologies|what do you use|tools you use|programming languages|languages|stack"],
+    "answer": "Python and JavaScript (Node.js / React) for code. Claude API, GPT-5.5, and Google AI Studio for AI. SQL and funnel analytics for data. Meta Ads + LinkedIn Ads Manager for paid growth. Claude Code for most of the actual building — it's genuinely changed how fast I can go from idea to shipped."
+  },
+  {
+    "patterns": ["jynlab|zombie app|app store intelligence"],
+    "answer": "JYNLAB scans the App Store for zombie apps — high downloads, terrible ratings. Those gaps are market opportunities hiding in plain sight. It surfaces the niche, aggregates user complaints into insight, and sends daily keyword alerts. Available now at jynlab.com with a lifetime deal."
+  },
+  {
+    "patterns": ["admade|ad creative|ad generation"],
+    "answer": "ADMADE is an AI-powered ad creative generation platform. Describe your product and audience, get back ready-to-run creatives. Still in development — watch this space."
+  },
+  {
+    "patterns": ["funnellens|funnel|conversion rate|diagnostic"],
+    "answer": "FunnelLens is an AI funnel diagnostic agent. Walk it through your ad → landing page → lead gen → sales flow and it tells you where you're losing people and why. Built for growth PMs and marketers who are tired of guessing."
+  },
+  {
+    "patterns": ["qrefiner|user research|mom test|research questions"],
+    "answer": "qrefiner helps you write better user research questions using The Mom Test framework — so you actually learn something useful instead of hearing what people think you want to hear. Find it on GitHub."
+  },
+  {
+    "patterns": ["prd|product requirements|pm.prd|document"],
+    "answer": "pm-prd-generator automates the boilerplate parts of writing a PRD so you can focus on the actual decisions. It uses LLMs to generate structure, context, and edge-case sections from a short brief. On GitHub."
+  },
+  {
+    "patterns": ["background|experience|career|history|how did you get here"],
+    "answer": "My path: performance marketing → product management → indie AI builder. Started running ROAS-optimized ad campaigns, moved into product strategy and roadmapping, then started shipping my own tools. The marketing background gives me a growth lens most engineers don't have — and vice versa."
+  },
+  {
+    "patterns": ["ai|machine learning|llm|claude|openai|gpt|artificial intelligence|large language model"],
+    "answer": "AI is where I spend most of my creative energy. I build with Claude Code daily, use the Anthropic and OpenAI APIs for product prototypes, and experiment with RAG pipelines and multi-step agent workflows. Less theory, more shipping."
+  },
+  {
+    "patterns": ["marketing|ads|meta|tiktok|roas|paid|performance marketing"],
+    "answer": "My roots are in performance marketing — Meta Ads, TikTok Ads, ROAS optimization, funnel analysis. That foundation gives me a user-acquisition and conversion lens that most PMs don't have. It also means I can build tools that actually solve ad-workflow problems."
+  },
+  {
+    "patterns": ["contact|email|reach|get in touch|message"],
+    "answer": "Best way: byjennypark@gmail.com. You can also find me on LinkedIn at linkedin.com/in/jennypark7 or browse my projects on GitHub at github.com/jinyeong-park. I reply fast."
+  },
+  {
+    "patterns": ["hire|work together|collaborate|freelance|consulting|available|availability|open to work"],
+    "answer": "I'm selectively open to product consulting, fractional PM work, and early-stage collaborations — especially at the intersection of AI tooling and growth. Drop a line at byjennypark@gmail.com with what you're building."
+  },
+  {
+    "patterns": ["rate|rates|pricing|cost|how much|fee"],
+    "answer": "Consulting rates depend on scope, timeline, and what we're building. Email byjennypark@gmail.com and let's figure it out — I'd rather talk about the problem first."
+  },
+  {
+    "patterns": ["location|where are you|city|based|timezone|remote"],
+    "answer": "San Jose, CA — Pacific Time. I work remote and am comfortable with async collaboration across timezones. I've shipped products with fully distributed teams."
+  },
+  {
+    "patterns": ["github|open source|repos|code"],
+    "answer": "github.com/jinyeong-park — you'll find PM AI tools (funnellens, qrefiner, pm-prd-generator), Claude Code skills, and various experiments. Most of my best stuff is unlisted or still in progress."
+  },
+  {
+    "patterns": ["linkedin"],
+    "answer": "linkedin.com/in/jennypark7 — connect with me there. I post occasionally about AI tooling, product strategy, and building in public."
+  },
+  {
+    "patterns": ["fun fact|hobbies|hobby|outside work|personal|interests|about you"],
+    "answer": "I'm a chronic side-project launcher. When I'm not building software I'm thinking about building software. Also: I ship faster than I sleep, and I'm working on fixing that second part."
+  }
+]

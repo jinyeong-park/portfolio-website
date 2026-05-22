@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
+import qaData from "@/data/qa.json";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -15,12 +16,25 @@ interface SectionState {
   streamedUnits: number;
 }
 
+interface QAEntry {
+  patterns: string[];
+  answer: string;
+}
+
+interface ChatEntry {
+  question: string;
+  answer: string;
+  streamedChars: number;
+  done: boolean;
+}
+
 // ─── Animation constants ──────────────────────────────────────────────────────
 
 const BRAILLE = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
 const TYPING_MS = 34;
 const TOOL_MS = 390;
 const TOOL_COLLAPSE_MS = 220;
+const CHAT_STREAM_MS = 16;
 
 const PROMPTS = [
   "who is jenny?",
@@ -43,12 +57,14 @@ const SECTION_TOOLS: string[][] = [
 type BioToken = { word: string; accent?: boolean };
 
 const RAW_BIO: Array<{ text: string; accent?: boolean }> = [
-  { text: "Jenny Park is a PM and indie builder operating at the intersection of " },
+  {
+    text: "Jenny Park is a PM and indie builder operating at the intersection of ",
+  },
   { text: "AdTech strategy", accent: true },
   { text: " and " },
   { text: "AI-native product development", accent: true },
   { text: ". She has driven ROAS-optimized campaigns across " },
-  { text: "Meta and TikTok Ads", accent: true },
+  { text: "Meta and LinkedIn Ads", accent: true },
   { text: ", while rapid-prototyping and shipping tools leveraging " },
   { text: "Claude Code", accent: true },
   { text: ", " },
@@ -57,13 +73,15 @@ const RAW_BIO: Array<{ text: string; accent?: boolean }> = [
   { text: "LLM ecosystem", accent: true },
   { text: " (Gemini, Perplexity). Currently, she is building " },
   { text: "JYNLAB", accent: true },
-  { text: ", a market-intelligence platform helping indie developers spot opportunities in underperforming App Store apps." },
+  {
+    text: ", a market-intelligence platform helping indie developers spot opportunities in underperforming App Store apps.",
+  },
 ];
 
 const BIO_TOKENS: BioToken[] = RAW_BIO.flatMap((part) =>
   part.accent
     ? [{ word: part.text, accent: true }]
-    : (part.text.match(/\S+\s*/g) ?? []).map((w) => ({ word: w }))
+    : (part.text.match(/\S+\s*/g) ?? []).map((w) => ({ word: w })),
 );
 
 const STREAM_UNITS = [4, BIO_TOKENS.length, 5, 5, 4];
@@ -74,25 +92,83 @@ const STREAM_MS = [110, 28, 75, 65, 65];
 const skills = [
   { label: "product", value: "Product Strategy · Roadmapping · PRD Writing" },
   { label: "marketing", value: "Meta Ads · TikTok Ads · ROAS Optimization" },
-  { label: "engineering", value: "Python · JavaScript · Node.js · React · REST APIs" },
-  { label: "ai/ml", value: "Claude API · GPT-4o · LLM APIs · Google AI Studio · RAG" },
+  {
+    label: "engineering",
+    value: "Python · JavaScript · Node.js · React · REST APIs",
+  },
+  {
+    label: "ai/ml",
+    value: "Claude API · GPT-4o · LLM APIs · Google AI Studio · RAG",
+  },
   { label: "data", value: "SQL · Funnel Analytics · Cohort Analysis" },
 ];
 
 const projects = [
-  { name: "JYNLAB", description: "App Store intelligence — find zombie app niches", href: "https://jynlab.com", label: "jynlab.com" },
-  { name: "ADMADE", description: "AI-powered ad creative generation platform", href: "https://admade.com", label: "admade.com" },
-  { name: "funnellens", description: "AI funnel diagnostic agent for conversion gaps", href: "https://github.com/jinyeong-park/funnellens", label: "github" },
-  { name: "qrefiner", description: "User-research question refinement (The Mom Test)", href: "https://github.com/jinyeong-park/qrefiner", label: "github" },
-  { name: "pm-prd-generator", description: "Automate product requirements docs with LLM", href: "https://github.com/jinyeong-park/pm-prd-generator", label: "github" },
+  {
+    name: "JYNLAB",
+    description: "App Store intelligence — find zombie app niches",
+    href: "https://jynlab.com",
+    label: "jynlab.com",
+  },
+  {
+    name: "ADMADE",
+    description: "AI-powered ad creative generation platform",
+    href: "https://admade.com",
+    label: "admade.com",
+  },
+  {
+    name: "funnellens",
+    description: "AI funnel diagnostic agent for conversion gaps",
+    href: "https://github.com/jinyeong-park/funnellens",
+    label: "github",
+  },
+  {
+    name: "qrefiner",
+    description: "User-research question refinement (The Mom Test)",
+    href: "https://github.com/jinyeong-park/qrefiner",
+    label: "github",
+  },
+  {
+    name: "pm-prd-generator",
+    description: "Automate product requirements docs with LLM",
+    href: "https://github.com/jinyeong-park/pm-prd-generator",
+    label: "github",
+  },
 ];
 
 const contacts = [
-  { label: "email", value: "byjennypark@gmail.com", href: "mailto:byjennypark@gmail.com" },
-  { label: "linkedin", value: "/in/jennypark7", href: "https://www.linkedin.com/in/jennypark7/" },
-  { label: "github", value: "/jinyeong-park", href: "https://github.com/jinyeong-park" },
+  {
+    label: "email",
+    value: "byjennypark@gmail.com",
+    href: "mailto:byjennypark@gmail.com",
+  },
+  {
+    label: "linkedin",
+    value: "/in/jennypark7",
+    href: "https://www.linkedin.com/in/jennypark7/",
+  },
+  {
+    label: "github",
+    value: "/jinyeong-park",
+    href: "https://github.com/jinyeong-park",
+  },
   { label: "web", value: "jynlab.com", href: "https://jynlab.com" },
 ];
+
+// ─── Chat matching ────────────────────────────────────────────────────────────
+
+const FALLBACK =
+  'No match. Try: "what\'s your tech stack?", "what is JYNLAB?", "how do I hire you?", "where are you based?" — or just email byjennypark@gmail.com.';
+
+function findAnswer(input: string): string {
+  const q = input.trim();
+  for (const entry of qaData as QAEntry[]) {
+    for (const pattern of entry.patterns) {
+      if (new RegExp(pattern, "i").test(q)) return entry.answer;
+    }
+  }
+  return FALLBACK;
+}
 
 // ─── Small components ─────────────────────────────────────────────────────────
 
@@ -107,14 +183,19 @@ function BlockCursor({ blinking = false }: { blinking?: boolean }) {
 function BrailleSpinner() {
   const [frame, setFrame] = useState(0);
   useEffect(() => {
-    const id = setInterval(() => setFrame((f) => (f + 1) % BRAILLE.length), 100);
+    const id = setInterval(
+      () => setFrame((f) => (f + 1) % BRAILLE.length),
+      100,
+    );
     return () => clearInterval(id);
   }, []);
   return <span className="text-accent">{BRAILLE[frame]}</span>;
 }
 
 function IndentBlock({ children }: { children: React.ReactNode }) {
-  return <div className="border-l border-border pl-4 sm:pl-6 mt-1">{children}</div>;
+  return (
+    <div className="border-l border-border pl-4 sm:pl-6 mt-1">{children}</div>
+  );
 }
 
 function ToolUseBlock({
@@ -175,7 +256,13 @@ function HeroBody({ revealed }: { revealed: number }) {
             className="relative w-52 h-52 rounded-full ring-2 ring-accent"
             style={{ boxShadow: "0 0 80px -15px rgba(245,158,11,0.55)" }}
           >
-            <Image src="/me.png" alt="Jenny Park" fill className="rounded-full object-cover" priority />
+            <Image
+              src="/me.png"
+              alt="Jenny Park"
+              fill
+              className="rounded-full object-cover"
+              priority
+            />
           </div>
           <span className="text-muted text-xs">me.png</span>
         </div>
@@ -185,7 +272,9 @@ function HeroBody({ revealed }: { revealed: number }) {
           <h1 className="text-5xl sm:text-6xl font-bold uppercase tracking-wide text-foreground">
             JENNY PARK
           </h1>
-          <p className="text-2xl text-success">Product Manager &amp; AI-Native Builder</p>
+          <p className="text-2xl text-success">
+            Product Manager &amp; AI-Native Builder
+          </p>
           {r >= 3 && (
             <>
               <p className="text-lg leading-relaxed">
@@ -198,25 +287,75 @@ function HeroBody({ revealed }: { revealed: number }) {
           )}
           {r >= 4 && (
             <div className="flex items-center gap-4 mt-1">
-              <a href="https://github.com/jinyeong-park" target="_blank" rel="noopener noreferrer" className="text-dim hover:text-accent transition-colors" aria-label="GitHub">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <a
+                href="https://github.com/jinyeong-park"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-dim hover:text-accent transition-colors"
+                aria-label="GitHub"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
                   <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
                 </svg>
               </a>
-              <a href="https://www.linkedin.com/in/jennypark7/" target="_blank" rel="noopener noreferrer" className="text-dim hover:text-accent transition-colors" aria-label="LinkedIn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <a
+                href="https://www.linkedin.com/in/jennypark7/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-dim hover:text-accent transition-colors"
+                aria-label="LinkedIn"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                 </svg>
               </a>
-              <a href="https://jynlab.com" target="_blank" rel="noopener noreferrer" className="text-dim hover:text-accent transition-colors" aria-label="Website">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <a
+                href="https://jynlab.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-dim hover:text-accent transition-colors"
+                aria-label="Website"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <circle cx="12" cy="12" r="10" />
                   <line x1="2" y1="12" x2="22" y2="12" />
                   <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                 </svg>
               </a>
-              <a href="mailto:byjennypark@gmail.com" className="text-dim hover:text-accent transition-colors" aria-label="Email">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <a
+                href="mailto:byjennypark@gmail.com"
+                className="text-dim hover:text-accent transition-colors"
+                aria-label="Email"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                   <polyline points="22,6 12,13 2,6" />
                 </svg>
@@ -229,23 +368,40 @@ function HeroBody({ revealed }: { revealed: number }) {
   );
 }
 
-function BioBody({ revealed, showCursor }: { revealed: number; showCursor?: boolean }) {
-  const tokens = BIO_TOKENS.slice(0, revealed === Infinity ? BIO_TOKENS.length : revealed);
+function BioBody({
+  revealed,
+  showCursor,
+}: {
+  revealed: number;
+  showCursor?: boolean;
+}) {
+  const tokens = BIO_TOKENS.slice(
+    0,
+    revealed === Infinity ? BIO_TOKENS.length : revealed,
+  );
   return (
     <p className="text-lg leading-8 max-w-3xl mt-4">
       {tokens.map((t, i) =>
         t.accent ? (
-          <span key={i} className="text-accent">{t.word}</span>
+          <span key={i} className="text-accent">
+            {t.word}
+          </span>
         ) : (
           <span key={i}>{t.word}</span>
-        )
+        ),
       )}
       {showCursor && <BlockCursor blinking />}
     </p>
   );
 }
 
-function SkillsBody({ revealed, showCursor }: { revealed: number; showCursor?: boolean }) {
+function SkillsBody({
+  revealed,
+  showCursor,
+}: {
+  revealed: number;
+  showCursor?: boolean;
+}) {
   const cap = Math.min(revealed === Infinity ? 999 : revealed, skills.length);
   return (
     <div className="mt-4 space-y-1.5">
@@ -262,17 +418,33 @@ function SkillsBody({ revealed, showCursor }: { revealed: number; showCursor?: b
   );
 }
 
-function ProjectsBody({ revealed, showCursor }: { revealed: number; showCursor?: boolean }) {
+function ProjectsBody({
+  revealed,
+  showCursor,
+}: {
+  revealed: number;
+  showCursor?: boolean;
+}) {
   const cap = Math.min(revealed === Infinity ? 999 : revealed, projects.length);
   return (
     <div className="mt-4 space-y-2">
       {projects.slice(0, cap).map(({ name, description, href, label }, idx) => (
-        <div key={name} className="flex items-baseline justify-between gap-4 text-sm sm:text-base">
+        <div
+          key={name}
+          className="flex items-baseline justify-between gap-4 text-sm sm:text-base"
+        >
           <div className="flex items-baseline gap-0 min-w-0">
-            <a href={href} target="_blank" rel="noopener noreferrer" className="text-highlight hover:underline underline-offset-4 shrink-0">
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-highlight hover:underline underline-offset-4 shrink-0"
+            >
               {name}
             </a>
-            <span className="text-foreground truncate">&nbsp;— {description}</span>
+            <span className="text-foreground truncate">
+              &nbsp;— {description}
+            </span>
             {showCursor && idx === cap - 1 && <BlockCursor blinking />}
           </div>
           <span className="text-muted text-xs shrink-0">↗ {label}</span>
@@ -282,7 +454,13 @@ function ProjectsBody({ revealed, showCursor }: { revealed: number; showCursor?:
   );
 }
 
-function ContactBody({ revealed, showCursor }: { revealed: number; showCursor?: boolean }) {
+function ContactBody({
+  revealed,
+  showCursor,
+}: {
+  revealed: number;
+  showCursor?: boolean;
+}) {
   const cap = Math.min(revealed === Infinity ? 999 : revealed, contacts.length);
   return (
     <div className="mt-4 space-y-1.5">
@@ -316,18 +494,83 @@ const DONE_STATE: SectionState[] = Array.from({ length: 5 }, () => ({
 
 export default function Home() {
   const [sections, setSections] = useState<SectionState[]>(DONE_STATE);
+  const [chatActive, setChatActive] = useState(false);
+  const [chatHistory, setChatHistory] = useState<ChatEntry[]>([]);
+  const [chatInput, setChatInput] = useState("");
+  const [chatStreaming, setChatStreaming] = useState(false);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
+
+  const scrollBottom = useCallback(() => {
+    if (bodyRef.current) {
+      bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
+    }
+  }, []);
+
+  // Focus input when chat activates
+  useEffect(() => {
+    if (chatActive) setTimeout(() => inputRef.current?.focus(), 60);
+  }, [chatActive]);
+
+  // Scroll to bottom whenever history grows
+  useEffect(() => {
+    if (chatHistory.length > 0) {
+      setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" }), 30);
+    }
+  }, [chatHistory.length]);
+
+  const handleChatSubmit = useCallback(
+    async (question: string) => {
+      const q = question.trim();
+      if (!q || chatStreaming) return;
+      const answer = findAnswer(q);
+      setChatInput("");
+      setChatStreaming(true);
+      setChatHistory((prev) => [
+        ...prev,
+        { question: q, answer, streamedChars: 0, done: false },
+      ]);
+      const sleep = (ms: number) =>
+        new Promise<void>((res) => setTimeout(res, ms));
+      for (let c = 1; c <= answer.length; c++) {
+        await sleep(CHAT_STREAM_MS);
+        setChatHistory((prev) =>
+          prev.map((e, idx) =>
+            idx === prev.length - 1 ? { ...e, streamedChars: c } : e,
+          ),
+        );
+        if (c % 10 === 0) scrollBottom();
+      }
+      setChatHistory((prev) =>
+        prev.map((e, idx) =>
+          idx === prev.length - 1 ? { ...e, done: true } : e,
+        ),
+      );
+      setChatStreaming(false);
+      scrollBottom();
+      setTimeout(() => inputRef.current?.focus(), 30);
+    },
+    [chatStreaming, scrollBottom],
+  );
 
   useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     const alreadyRan = sessionStorage.getItem("portfolio-animated") === "1";
-    if (reduced || alreadyRan) return;
+    if (reduced || alreadyRan) {
+      setChatActive(true);
+      return;
+    }
     sessionStorage.setItem("portfolio-animated", "1");
 
     const cancelled = { value: false };
 
     function update(i: number, patch: Partial<SectionState>) {
       setSections((prev) =>
-        prev.map((s, idx) => (idx === i ? { ...s, ...patch } : s))
+        prev.map((s, idx) => (idx === i ? { ...s, ...patch } : s)),
       );
     }
 
@@ -381,16 +624,19 @@ export default function Home() {
           toolsDone: 0,
           toolsExpanded: false,
           streamedUnits: 0,
-        }))
+        })),
       );
       for (let i = 0; i < 5; i++) {
         if (cancelled.value) return;
         await animateSection(i);
       }
+      if (!cancelled.value) setChatActive(true);
     }
 
     runAll();
-    return () => { cancelled.value = true; };
+    return () => {
+      cancelled.value = true;
+    };
   }, []);
 
   const allDone = sections.every((s) => s.phase === "done");
@@ -429,8 +675,10 @@ export default function Home() {
             onToggle={() =>
               setSections((prev) =>
                 prev.map((sec, idx) =>
-                  idx === i ? { ...sec, toolsExpanded: !sec.toolsExpanded } : sec
-                )
+                  idx === i
+                    ? { ...sec, toolsExpanded: !sec.toolsExpanded }
+                    : sec,
+                ),
               )
             }
           />
@@ -441,9 +689,15 @@ export default function Home() {
           <IndentBlock>
             {i === 0 && <HeroBody revealed={revealed} />}
             {i === 1 && <BioBody revealed={revealed} showCursor={isStream} />}
-            {i === 2 && <SkillsBody revealed={revealed} showCursor={isStream} />}
-            {i === 3 && <ProjectsBody revealed={revealed} showCursor={isStream} />}
-            {i === 4 && <ContactBody revealed={revealed} showCursor={isStream} />}
+            {i === 2 && (
+              <SkillsBody revealed={revealed} showCursor={isStream} />
+            )}
+            {i === 3 && (
+              <ProjectsBody revealed={revealed} showCursor={isStream} />
+            )}
+            {i === 4 && (
+              <ContactBody revealed={revealed} showCursor={isStream} />
+            )}
             {i === 0 && isStream && (
               <div className="mt-2">
                 <BlockCursor blinking />
@@ -461,9 +715,18 @@ export default function Home() {
         {/* Chrome bar */}
         <div className="flex items-center justify-between px-4 py-2.5 border-b border-border shrink-0">
           <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full inline-block" style={{ background: "#ff5f57" }} />
-            <span className="w-3 h-3 rounded-full inline-block" style={{ background: "#febc2e" }} />
-            <span className="w-3 h-3 rounded-full inline-block" style={{ background: "#28c840" }} />
+            <span
+              className="w-3 h-3 rounded-full inline-block"
+              style={{ background: "#ff5f57" }}
+            />
+            <span
+              className="w-3 h-3 rounded-full inline-block"
+              style={{ background: "#febc2e" }}
+            />
+            <span
+              className="w-3 h-3 rounded-full inline-block"
+              style={{ background: "#28c840" }}
+            />
             <span className="text-dim ml-3 text-sm">jenny@terminal — 0:45</span>
           </div>
           <div className="flex items-center gap-3">
@@ -481,14 +744,70 @@ export default function Home() {
         </div>
 
         {/* Body */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-8 space-y-10">
+        <div ref={bodyRef} className="flex-1 overflow-y-auto p-4 sm:p-8 space-y-10">
           {sections.map((_, i) => renderSection(i))}
 
-          {/* Trailing cursor — blinks only when all sections are done */}
-          <div className="flex items-center gap-2 pt-2 pb-4">
-            <span className="text-accent">&gt;</span>
-            <BlockCursor blinking={allDone} />
-          </div>
+          {/* Trailing cursor — hidden once chat activates */}
+          {!chatActive && (
+            <div className="flex items-center gap-2 pt-2 pb-4">
+              <span className="text-accent">&gt;</span>
+              <BlockCursor blinking={allDone} />
+            </div>
+          )}
+
+          {/* ── Chat ──────────────────────────────────────────────────── */}
+          {chatActive && (
+            <div className="pt-2 pb-4 space-y-6">
+              {/* Separator */}
+              <div className="flex items-center gap-3">
+                <div className="flex-1 border-t border-border" />
+                <span className="text-muted text-xs shrink-0">// chat mode</span>
+                <div className="flex-1 border-t border-border" />
+              </div>
+
+              {/* Scrollback history */}
+              {chatHistory.map((entry, i) => (
+                <div key={`${i}-${entry.question}`} className="space-y-2">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-dim select-none">$</span>
+                    <span className="text-accent select-none">ask&gt;</span>
+                    <span className="text-foreground">{entry.question}</span>
+                  </div>
+                  <div className="border-l border-border pl-4 sm:pl-6">
+                    <p className="text-base leading-7 max-w-3xl">
+                      {entry.done
+                        ? entry.answer
+                        : entry.answer.slice(0, entry.streamedChars)}
+                      {!entry.done && <BlockCursor blinking />}
+                    </p>
+                  </div>
+                </div>
+              ))}
+
+              {/* Active input line */}
+              <div className="flex items-center gap-2">
+                <span className="text-dim select-none">$</span>
+                <span className="text-accent select-none">ask&gt;</span>
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={chatInput}
+                  onChange={(e) => setChatInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleChatSubmit(chatInput);
+                  }}
+                  disabled={chatStreaming}
+                  placeholder={chatStreaming ? "" : "ask me anything…"}
+                  className="flex-1 bg-transparent border-none outline-none text-foreground placeholder:text-muted font-mono text-base disabled:opacity-40"
+                  autoComplete="off"
+                  spellCheck={false}
+                />
+                {chatStreaming && <BlockCursor blinking />}
+              </div>
+
+              <div ref={bottomRef} />
+            </div>
+          )}
         </div>
       </div>
     </main>
