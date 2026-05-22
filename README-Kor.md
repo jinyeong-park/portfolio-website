@@ -58,13 +58,13 @@ npx create-next-app@latest .
 - `resources/prompts/03-chat-qa.md` 파일의 프롬프트를 복사하여 Claude에게 요청합니다.
 - **확인:** 최종적으로 `localhost`에서 Q&A 기능이 인터랙티브하게 작동하는지 테스트합니다.
 
+### 배포 방법
 
+jinyeong-park.github.io/portfolio-website
+현재 리포지토리 이름 그대로 사용. 리포 이름 변경 없이 바로 배포 가능.
 
-### 배포 방법                                     
-                                                            
-❯ 1. jinyeong-park.github.io
-    루트 GitHub Pages — 리포지토리 이름을 jinyeong-park.github.io로 바꿔야 합니다. 가장 깔끔한 URL.
-  2. jinyeong-park.github.io/portfolio-website
-    현재 리포지토리 이름 그대로 사용. 리포 이름 변경 없이 바로 배포 가능.                          
-  3. 커스텀 도메인 (e.g. jynlab.com)                              
-    커스텀 도메인 연결. CNAME 파일 추가 + DNS 설정 필요.
+이 프로젝트는 단순한 Html파일이 아니라 Next.js라서 빌드 단계가 필요해서 Actions가 필요합니다. 소스 파일을 그냥 GitHub Pages에 올리면 .tsx 파일을 브라우저가 이해 못합니다.  
+진행 상황은 여기서 확인할 수 있습니다:  
+https://github.com/jinyeong-park/portfolio-website/actions
+
+Actions 탭에서 Settings → Pages → Source를 GitHub Actions로 바꾸는 것만 남았습니다

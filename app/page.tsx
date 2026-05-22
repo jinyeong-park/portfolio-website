@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import Image from "next/image";
 import qaData from "@/data/qa.json";
+
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -252,18 +253,15 @@ function HeroBody({ revealed }: { revealed: number }) {
     <div className="flex flex-col md:flex-row gap-8 mt-4">
       {r >= 1 && (
         <div className="shrink-0 flex flex-col items-center gap-2">
-          <div
-            className="relative w-52 h-52 rounded-full ring-2 ring-accent"
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`${BASE_PATH}/me.png`}
+            alt="Jenny Park"
+            width={208}
+            height={208}
+            className="w-52 h-52 rounded-full object-cover ring-2 ring-accent"
             style={{ boxShadow: "0 0 80px -15px rgba(245,158,11,0.55)" }}
-          >
-            <Image
-              src="/me.png"
-              alt="Jenny Park"
-              fill
-              className="rounded-full object-cover"
-              priority
-            />
-          </div>
+          />
           <span className="text-muted text-xs">me.png</span>
         </div>
       )}
@@ -493,6 +491,7 @@ const DONE_STATE: SectionState[] = Array.from({ length: 5 }, () => ({
 }));
 
 export default function Home() {
+  const [resetKey, setResetKey] = useState(0);
   const [sections, setSections] = useState<SectionState[]>(DONE_STATE);
   const [chatActive, setChatActive] = useState(false);
   const [chatHistory, setChatHistory] = useState<ChatEntry[]>([]);
@@ -520,6 +519,24 @@ export default function Home() {
       setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" }), 30);
     }
   }, [chatHistory.length]);
+
+  const handleNewSession = useCallback(() => {
+    sessionStorage.removeItem("portfolio-animated");
+    setChatActive(false);
+    setChatHistory([]);
+    setChatInput("");
+    setChatStreaming(false);
+    setSections(
+      Array.from({ length: 5 }, () => ({
+        phase: "hidden" as Phase,
+        promptChars: 0,
+        toolsDone: 0,
+        toolsExpanded: false,
+        streamedUnits: 0,
+      })),
+    );
+    setResetKey((k) => k + 1);
+  }, []);
 
   const handleChatSubmit = useCallback(
     async (question: string) => {
@@ -637,7 +654,8 @@ export default function Home() {
     return () => {
       cancelled.value = true;
     };
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resetKey]);
 
   const allDone = sections.every((s) => s.phase === "done");
 
@@ -730,7 +748,10 @@ export default function Home() {
             <span className="text-dim ml-3 text-sm">jenny@terminal — 0:45</span>
           </div>
           <div className="flex items-center gap-3">
-            <button className="border border-accent text-accent text-xs px-3 py-1 rounded-md cursor-default">
+            <button
+              onClick={handleNewSession}
+              className="border border-accent text-accent text-xs px-3 py-1 rounded-md hover:bg-accent hover:text-background transition-colors cursor-pointer"
+            >
               new session
             </button>
             <kbd className="border border-border text-dim text-xs px-2 py-1 rounded font-mono">
