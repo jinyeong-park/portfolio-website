@@ -40,7 +40,7 @@ npx create-next-app@latest .
 `01-research-and-build.md` 파일의 프롬프트 내용을 복사한 뒤, 본인의 인적 사항을 채워 Claude에게 전달합니다.
 
 > 📝 **내 정보 입력 예시:**
-> "My name is Jenny Park. My LinkedIn: [https://www.linkedin.com/in/jennypark7/](https://www.linkedin.com/in/jennypark7/), My GitHub: [https://github.com/jinyeong-park?tab=repositories](https://github.com/jinyeong-park?tab=repositories). Currently working on jynlab.com and admade.com. Location: San Jose, CA. Email: byjennypark@gmail.com"
+> "My name is Jenny Park. My LinkedIn: [https://www.linkedin.com/in/jennypark7/](https://www.linkedin.com/in/jennypark7/), My GitHub: [https://github.com/jinyeong-park?tab=repositories](https://github.com/jinyeong-park?tab=repositories). Currently working on jynlab.com and tryadmade.com. Location: San Jose, CA. Email: byjennypark@gmail.com"
 
 - **확인:** 빌드가 완료되면 `localhost`에서 정상적으로 출력되는지 확인합니다.
 

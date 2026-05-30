@@ -114,8 +114,8 @@ const projects = [
   {
     name: "ADMADE",
     description: "AI-powered ad creative generation platform",
-    href: "https://admade.com",
-    label: "admade.com",
+    href: "https://tryadmade.com",
+    label: "tryadmade.com",
   },
   {
     name: "funnellens",
@@ -516,7 +516,14 @@ export default function Home() {
   // Scroll to bottom whenever history grows
   useEffect(() => {
     if (chatHistory.length > 0) {
-      setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" }), 30);
+      setTimeout(
+        () =>
+          bottomRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+          }),
+        30,
+      );
     }
   }, [chatHistory.length]);
 
@@ -654,7 +661,7 @@ export default function Home() {
     return () => {
       cancelled.value = true;
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetKey]);
 
   const allDone = sections.every((s) => s.phase === "done");
@@ -765,7 +772,10 @@ export default function Home() {
         </div>
 
         {/* Body */}
-        <div ref={bodyRef} className="flex-1 overflow-y-auto p-4 sm:p-8 space-y-10">
+        <div
+          ref={bodyRef}
+          className="flex-1 overflow-y-auto p-4 sm:p-8 space-y-10"
+        >
           {sections.map((_, i) => renderSection(i))}
 
           {/* Trailing cursor — hidden once chat activates */}
@@ -782,7 +792,9 @@ export default function Home() {
               {/* Separator */}
               <div className="flex items-center gap-3">
                 <div className="flex-1 border-t border-border" />
-                <span className="text-muted text-xs shrink-0">// chat mode</span>
+                <span className="text-muted text-xs shrink-0">
+                  // chat mode
+                </span>
                 <div className="flex-1 border-t border-border" />
               </div>
 
