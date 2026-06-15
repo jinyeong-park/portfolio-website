@@ -118,12 +118,6 @@ const projects = [
     label: "tryadmade.com",
   },
   {
-    name: "Mytutorpage",
-    description: "Link-in-bio + landing page builder for tutors",
-    href: "https://mytutorpage.com",
-    label: "mytutorpage.com",
-  },
-  {
     name: "funnellens",
     description: "AI funnel diagnostic agent for conversion gaps",
     href: "https://github.com/jinyeong-park/funnellens",

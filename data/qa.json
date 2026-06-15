@@ -13,7 +13,7 @@
   },
   {
     "patterns": ["projects|what are you building|current projects|what are you doing currently|portfolio"],
-    "answer": "Current: JYNLAB (live at jynlab.com), Mytutorpage (live at mytutorpage.com), ADMADE (in dev). Recent tools: funnellens, qrefiner, pm-prd-generator, ai-prompt-for-pm. I tend to build things that solve problems I have as a PM and then open-source or productize them."
+    "answer": "Current: JYNLAB (live at jynlab.com), ADMADE (in dev). Recent tools: funnellens, qrefiner, pm-prd-generator, ai-prompt-for-pm. I tend to build things that solve problems I have as a PM and then open-source or productize them."
   },
   {
     "patterns": ["is she working|currently working|what is she doing|what is she working on|is she employed|what's she up to"],
@@ -34,10 +34,6 @@
   {
     "patterns": ["admade|ad creative|ad generation"],
     "answer": "ADMADE is an AI-powered ad creative generation platform. Describe your product and audience, get back ready-to-run creatives. Still in development — watch this space."
-  },
-  {
-    "patterns": ["mytutorpage|tutor page|link in bio|tutor|tutoring"],
-    "answer": "Mytutorpage is a link-in-bio and landing page builder for tutors. Tutors get a branded page at mytutorpage.com/yourname to showcase lessons, packages, booking, and payments — and share one beautiful link with students and parents. Live at mytutorpage.com."
   },
   {
     "patterns": ["funnellens|funnel|conversion rate|diagnostic"],
