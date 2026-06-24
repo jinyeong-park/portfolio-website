@@ -58,29 +58,25 @@ const SECTION_TOOLS: string[][] = [
 type BioToken = { word: string; accent?: boolean };
 
 const RAW_BIO: Array<{ text: string; accent?: boolean }> = [
+  { text: "Jenny Park is an " },
+  { text: "AI PM ", accent: true },
   {
-    text: "Jenny Park is a PM and indie builder operating at the intersection of ",
+    text: "and indie builder making founders visible.\n\nShe's building ",
   },
-  { text: "AdTech strategy", accent: true },
-  { text: " and " },
-  { text: "AI-native product development", accent: true },
-  { text: ". She has driven ROAS-optimized campaigns across " },
-  { text: "Meta and LinkedIn Ads", accent: true },
-  { text: ", while rapid-prototyping and shipping tools leveraging " },
-  { text: "Claude Code", accent: true },
-  { text: ", " },
-  { text: "OpenAI Codex", accent: true },
-  { text: ", and the broader " },
-  { text: "LLM ecosystem", accent: true },
-  { text: " (Gemini, Perplexity). Currently, she is building " },
-  { text: "verroagent", accent: true },
+  { text: "verroagent ", accent: true },
   {
-    text: ", an AI agent that plans your LinkedIn week — strategy, angles, and drafts, ready to approve — while running ",
+    text: "— an AI agent that plans your LinkedIn week. Tell it who you are, it gives you strategy, angles, and drafts. You just approve.\n\nWhy ",
+  },
+  { text: "LinkedIn", accent: true },
+  {
+    text: "? It's where trust compounds. Every post sharpens your thinking, builds your expertise, and turns visibility into pipeline. That's GTM.\n\nShe also runs ",
   },
   { text: "JYNLAB", accent: true },
-  {
-    text: ", her AI automation agency and hub for a zombie-app finder, idea analyzer, and blog.",
-  },
+  { text: ", an AI automation studio, and has shipped ad-scaling tools across " },
+  { text: "Meta", accent: true },
+  { text: ".\n\nAI PM background in " },
+  { text: "AdTech ", accent: true },
+  { text: "— now building in public." },
 ];
 
 const BIO_TOKENS: BioToken[] = RAW_BIO.flatMap((part) =>
@@ -110,14 +106,14 @@ const skills = [
 
 const projects = [
   {
-    name: "verroagent",
+    name: "VerroAgent",
     description:
       "AI agent that plans your LinkedIn week — strategy, angles, drafts",
     href: "https://verroagent.com",
     label: "verroagent.com",
   },
   {
-    name: "ADMADE",
+    name: "Admade",
     description: "AI-powered ad creative generation platform",
     href: "https://tryadmade.com",
     label: "tryadmade.com",
@@ -390,7 +386,7 @@ function BioBody({
     revealed === Infinity ? BIO_TOKENS.length : revealed,
   );
   return (
-    <p className="text-lg leading-8 max-w-3xl mt-4">
+    <p className="text-lg leading-8 max-w-3xl mt-4 whitespace-pre-line">
       {tokens.map((t, i) =>
         t.accent ? (
           <span key={i} className="text-accent">
