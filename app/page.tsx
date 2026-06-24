@@ -72,11 +72,11 @@ const RAW_BIO: Array<{ text: string; accent?: boolean }> = [
     text: "? It's where trust compounds. Every post sharpens your thinking, builds your expertise, and turns visibility into pipeline. That's GTM.\n\nShe also runs ",
   },
   { text: "JYNLAB", accent: true },
-  { text: ", an AI automation studio, and has shipped ad-scaling tools across " },
+  { text: ", an AI automation studio, and builds adtech — AI tools for ad creative and growth across " },
   { text: "Meta", accent: true },
-  { text: ".\n\nAI PM background in " },
+  { text: ".\n\nAI PM with an " },
   { text: "AdTech ", accent: true },
-  { text: "— now building in public." },
+  { text: "focus — now building in public." },
 ];
 
 const BIO_TOKENS: BioToken[] = RAW_BIO.flatMap((part) =>
@@ -91,15 +91,21 @@ const STREAM_MS = [110, 28, 75, 65, 65];
 // ─── Section data ─────────────────────────────────────────────────────────────
 
 const skills = [
-  { label: "product", value: "Product Strategy · Roadmapping · PRD Writing" },
-  { label: "marketing", value: "Meta Ads · TikTok Ads · ROAS Optimization" },
   {
-    label: "engineering",
-    value: "Python · JavaScript · Node.js · React · REST APIs",
+    label: "product",
+    value: "Product Strategy · Roadmapping · PRD · User Research · A/B Testing · GTM",
   },
   {
     label: "ai/ml",
-    value: "Claude API · GPT-4o · LLM APIs · Google AI Studio · RAG",
+    value: "AI Agents · Prompt Engineering · RAG · Evals · LLM APIs (Claude, GPT, Gemini)",
+  },
+  {
+    label: "engineering",
+    value: "Python · TypeScript · JavaScript · React · Next.js · Node.js · REST APIs · Git",
+  },
+  {
+    label: "adtech",
+    value: "Ad Creative Automation · Meta Ad Platforms · Growth Tooling",
   },
   { label: "data", value: "SQL · Funnel Analytics · Cohort Analysis" },
 ];
@@ -279,13 +285,13 @@ function HeroBody({ revealed }: { revealed: number }) {
             JENNY PARK
           </h1>
           <p className="text-2xl text-success">
-            Product Manager &amp; AI-Native Builder
+            AI Product Manager &amp; Builder
           </p>
           {r >= 3 && (
             <>
               <p className="text-lg leading-relaxed">
-                Multi-disciplinary operator bridging{" "}
-                <span className="text-accent">performance marketing</span> and{" "}
+                Ships AI products 0→1, bridging{" "}
+                <span className="text-accent">growth</span> and{" "}
                 <span className="text-accent">product engineering</span>
               </p>
               <p className="text-dim">// San Jose, CA</p>

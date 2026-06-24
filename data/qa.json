@@ -25,7 +25,7 @@
   },
   {
     "patterns": ["tech stack|technologies|what do you use|tools you use|programming languages|languages|stack"],
-    "answer": "Python and JavaScript (Node.js / React) for code. Claude API, GPT-5.5, and Google AI Studio for AI. SQL and funnel analytics for data. Meta Ads + LinkedIn Ads Manager for paid growth. Claude Code for most of the actual building — it's genuinely changed how fast I can go from idea to shipped."
+    "answer": "Python and JavaScript (Node.js / React) for code. Claude API, GPT, and Gemini for AI. SQL and funnel analytics for data. Meta Ads + LinkedIn Ads Manager for paid growth. Claude Code for most of the actual building — it's genuinely changed how fast I can go from idea to shipped."
   },
   {
     "patterns": ["verroagent|verro|linkedin agent|linkedin week|content agent"],
@@ -69,7 +69,7 @@
   },
   {
     "patterns": ["hire|work together|collaborate|freelance|consulting|available|availability|open to work"],
-    "answer": "I'm selectively open to product consulting, fractional PM work, and early-stage collaborations — especially at the intersection of AI tooling and growth. Drop a line at byjennypark@gmail.com with what you're building."
+    "answer": "I'm selectively open to founding-team roles, AI product work, product consulting, and early-stage collaborations — especially at the intersection of AI tooling and growth, where I can ship 0→1. Drop a line at byjennypark@gmail.com with what you're building."
   },
   {
     "patterns": ["rate|rates|pricing|cost|how much|fee"],
