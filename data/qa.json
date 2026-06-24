@@ -5,7 +5,7 @@
   },
   {
     "patterns": ["who are you|tell me about yourself|introduce yourself|what's your story"],
-    "answer": "I'm Jenny Park — a PM and indie builder based in San Jose, CA. I operate at the intersection of performance marketing and AI-native product engineering. I write PRDs in the morning, review funnels in the afternoon, and ship an AI tool by evening. Currently building JYNLAB."
+    "answer": "I'm Jenny Park — a PM and indie builder based in San Jose, CA. I operate at the intersection of performance marketing and AI-native product engineering. I write PRDs in the morning, review funnels in the afternoon, and ship an AI tool by evening. Currently focused on verroagent."
   },
   {
     "patterns": ["looking for a job|open to work|job search|seeking|employment|hiring|full.time|new role|new job|is she available"],
@@ -13,11 +13,11 @@
   },
   {
     "patterns": ["projects|what are you building|current projects|what are you doing currently|portfolio"],
-    "answer": "Current: JYNLAB (live at jynlab.com), ADMADE (in dev). Recent tools: funnellens, qrefiner, pm-prd-generator, ai-prompt-for-pm. I tend to build things that solve problems I have as a PM and then open-source or productize them."
+    "answer": "Current focus: verroagent (live at verroagent.com) — an AI agent that plans your LinkedIn week. Then ADMADE, my AI ad-creative platform, and JYNLAB, my AI automation agency, blog, and portfolio hub. Recent tools: funnellens, qrefiner, pm-prd-generator. I tend to build things that solve problems I have as a PM and then open-source or productize them."
   },
   {
     "patterns": ["is she working|currently working|what is she doing|what is she working on|is she employed|what's she up to"],
-    "answer": "She's building JYNLAB and ADMADE, plus a handful of other interesting projects. Always shipping something."
+    "answer": "She's heads-down on verroagent right now, while running JYNLAB (her AI automation agency, blog, and portfolio) and a handful of other projects. Always shipping something."
   },
   {
     "patterns": ["what do you do|your role|current role|day.to.day|job"],
@@ -28,8 +28,12 @@
     "answer": "Python and JavaScript (Node.js / React) for code. Claude API, GPT-5.5, and Google AI Studio for AI. SQL and funnel analytics for data. Meta Ads + LinkedIn Ads Manager for paid growth. Claude Code for most of the actual building — it's genuinely changed how fast I can go from idea to shipped."
   },
   {
-    "patterns": ["jynlab|zombie app|app store intelligence"],
-    "answer": "JYNLAB scans the App Store for zombie apps — high downloads, terrible ratings. Those gaps are market opportunities hiding in plain sight. It surfaces the niche, aggregates user complaints into insight, and sends daily keyword alerts. Available now at jynlab.com with a lifetime deal."
+    "patterns": ["verroagent|verro|linkedin agent|linkedin week|content agent"],
+    "answer": "verroagent is my current focus. Tell it who you are, and it plans your LinkedIn week — strategy, angles, and drafts, ready to approve. It's the AI content partner I wished I had. Live at verroagent.com."
+  },
+  {
+    "patterns": ["jynlab|zombie app|app store intelligence|automation agency|agency|idea analyzer|blog"],
+    "answer": "JYNLAB is my home base — an AI automation agency that also hosts my blog and portfolio. It still ships the tools it's known for: a zombie-app finder that scans the App Store for high-download, low-rating gaps, plus an idea analyzer. Find it at jynlab.com."
   },
   {
     "patterns": ["admade|ad creative|ad generation"],

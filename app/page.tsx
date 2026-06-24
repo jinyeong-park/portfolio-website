@@ -73,9 +73,13 @@ const RAW_BIO: Array<{ text: string; accent?: boolean }> = [
   { text: ", and the broader " },
   { text: "LLM ecosystem", accent: true },
   { text: " (Gemini, Perplexity). Currently, she is building " },
+  { text: "verroagent", accent: true },
+  {
+    text: ", an AI agent that plans your LinkedIn week — strategy, angles, and drafts, ready to approve — while running ",
+  },
   { text: "JYNLAB", accent: true },
   {
-    text: ", a market-intelligence platform helping indie developers spot opportunities in underperforming App Store apps.",
+    text: ", her AI automation agency and hub for a zombie-app finder, idea analyzer, and blog.",
   },
 ];
 
@@ -106,16 +110,24 @@ const skills = [
 
 const projects = [
   {
-    name: "JYNLAB",
-    description: "App Store intelligence — find zombie app niches",
-    href: "https://jynlab.com",
-    label: "jynlab.com",
+    name: "verroagent",
+    description:
+      "AI agent that plans your LinkedIn week — strategy, angles, drafts",
+    href: "https://verroagent.com",
+    label: "verroagent.com",
   },
   {
     name: "ADMADE",
     description: "AI-powered ad creative generation platform",
     href: "https://tryadmade.com",
     label: "tryadmade.com",
+  },
+  {
+    name: "JYNLAB",
+    description:
+      "AI automation agency & hub — zombie-app finder, idea analyzer, blog",
+    href: "https://jynlab.com",
+    label: "jynlab.com",
   },
   {
     name: "funnellens",
