@@ -61,22 +61,20 @@ const RAW_BIO: Array<{ text: string; accent?: boolean }> = [
   { text: "Jenny Park is an " },
   { text: "AI PM ", accent: true },
   {
-    text: "and indie builder making founders visible.\n\nShe's building ",
+    text: "and builder. She builds AI tools that turn attention into pipeline, and runs the growth systems behind them.\n\nShe's building ",
   },
-  { text: "verroagent ", accent: true },
+  { text: "VerroAgent", accent: true },
   {
-    text: "— an AI agent that plans your LinkedIn week. Tell it who you are, it gives you strategy, angles, and drafts. You just approve.\n\nWhy ",
+    text: ", an AI agent that plans your LinkedIn week. Tell it who you are, and it gives you strategy, angles, and drafts. You just approve.\n\nWhy ",
   },
   { text: "LinkedIn", accent: true },
   {
     text: "? It's where trust compounds. Every post sharpens your thinking, builds your expertise, and turns visibility into pipeline. That's GTM.\n\nShe also runs ",
   },
   { text: "JYNLAB", accent: true },
-  { text: ", an AI growth agency. JYNLAB builds AI tools and runs growth systems for clients — LinkedIn GTM, content, paid ads, and outbound. (" },
+  { text: ", an AI growth agency. JYNLAB builds AI tools and runs growth systems for clients: LinkedIn GTM, content, paid ads, and outbound. (" },
   { text: "Idea Analyzer", accent: true },
-  { text: ", a free idea-validation tool, lives inside it.)\n\nAI PM with an " },
-  { text: "AdTech ", accent: true },
-  { text: "focus — now building in public." },
+  { text: ", a free idea-validation tool, lives inside it.)\n\nAI PM who builds and ships. Now building in public." },
 ];
 
 const BIO_TOKENS: BioToken[] = RAW_BIO.flatMap((part) =>
@@ -104,17 +102,18 @@ const skills = [
     value: "Python · TypeScript · JavaScript · React · Next.js · Node.js · REST APIs · Git",
   },
   {
-    label: "adtech",
-    value: "Ad Creative Automation · Meta Ad Platforms · Growth Tooling",
+    label: "growth",
+    value: "LinkedIn GTM · Content Systems · Paid Ads (Meta) · Outbound · Ad Creative Automation · Funnel Optimization",
   },
   { label: "data", value: "SQL · Funnel Analytics · Cohort Analysis" },
+  { label: "stack", value: "Cursor · Lovable · Cloudflare · Supabase · Vercel" },
 ];
 
 const projects = [
   {
     name: "VerroAgent",
     description:
-      "AI agent that plans your LinkedIn week — strategy, angles, drafts",
+      "AI agent that plans your LinkedIn week: strategy, angles, drafts",
     href: "https://verroagent.com",
     label: "verroagent.com",
   },
@@ -127,7 +126,7 @@ const projects = [
   {
     name: "JYNLAB",
     description:
-      "AI growth agency — build AI tools & run growth systems. Free tool: Idea Analyzer",
+      "AI growth agency: build AI tools & run growth systems. Free tool: Idea Analyzer",
     href: "https://jynlab.com",
     label: "jynlab.com",
   },
@@ -455,7 +454,7 @@ function ProjectsBody({
               {name}
             </a>
             <span className="text-foreground truncate">
-              &nbsp;— {description}
+              &nbsp;· {description}
             </span>
             {showCursor && idx === cap - 1 && <BlockCursor blinking />}
           </div>
