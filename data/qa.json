@@ -13,11 +13,11 @@
   },
   {
     "patterns": ["projects|what are you building|current projects|what are you doing currently|portfolio"],
-    "answer": "Current focus: verroagent (live at verroagent.com) — an AI agent that plans your LinkedIn week. Then ADMADE, my AI ad-creative platform, and JYNLAB, my AI automation agency, blog, and portfolio hub. Recent tools: funnellens, qrefiner, pm-prd-generator. I tend to build things that solve problems I have as a PM and then open-source or productize them."
+    "answer": "Current focus: verroagent (live at verroagent.com) — an AI agent that plans your LinkedIn week. Then ADMADE, my AI ad-creative platform, and JYNLAB, my AI growth agency. Recent tools: funnellens, qrefiner, pm-prd-generator. I tend to build things that solve problems I have as a PM and then open-source or productize them."
   },
   {
     "patterns": ["is she working|currently working|what is she doing|what is she working on|is she employed|what's she up to"],
-    "answer": "She's heads-down on verroagent right now, while running JYNLAB (her AI automation agency, blog, and portfolio) and a handful of other projects. Always shipping something."
+    "answer": "She's heads-down on verroagent right now, while running JYNLAB (her AI growth agency) and a handful of other projects. Always shipping something."
   },
   {
     "patterns": ["what do you do|your role|current role|day.to.day|job"],
@@ -32,8 +32,8 @@
     "answer": "verroagent is my current focus. Tell it who you are, and it plans your LinkedIn week — strategy, angles, and drafts, ready to approve. It's the AI content partner I wished I had. Live at verroagent.com."
   },
   {
-    "patterns": ["jynlab|zombie app|app store intelligence|automation agency|agency|idea analyzer|blog"],
-    "answer": "JYNLAB is my home base — an AI automation agency that also hosts my blog and portfolio. It still ships the tools it's known for: a zombie-app finder that scans the App Store for high-download, low-rating gaps, plus an idea analyzer. Find it at jynlab.com."
+    "patterns": ["jynlab|growth agency|agency|idea analyzer|growth systems"],
+    "answer": "JYNLAB is my AI growth agency. It builds AI tools and runs growth systems for clients — LinkedIn GTM, content, paid ads, and outbound. Its free tool, Idea Analyzer, validates a software idea on real data. Find it at jynlab.com."
   },
   {
     "patterns": ["admade|ad creative|ad generation"],

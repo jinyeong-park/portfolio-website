@@ -72,9 +72,9 @@ const RAW_BIO: Array<{ text: string; accent?: boolean }> = [
     text: "? It's where trust compounds. Every post sharpens your thinking, builds your expertise, and turns visibility into pipeline. That's GTM.\n\nShe also runs ",
   },
   { text: "JYNLAB", accent: true },
-  { text: ", an AI automation studio, and builds adtech — AI tools for ad creative and growth across " },
-  { text: "Meta", accent: true },
-  { text: ".\n\nAI PM with an " },
+  { text: ", an AI growth agency. JYNLAB builds AI tools and runs growth systems for clients — LinkedIn GTM, content, paid ads, and outbound. (" },
+  { text: "Idea Analyzer", accent: true },
+  { text: ", a free idea-validation tool, lives inside it.)\n\nAI PM with an " },
   { text: "AdTech ", accent: true },
   { text: "focus — now building in public." },
 ];
@@ -127,7 +127,7 @@ const projects = [
   {
     name: "JYNLAB",
     description:
-      "AI automation agency & hub — zombie-app finder, idea analyzer, blog",
+      "AI growth agency — build AI tools & run growth systems. Free tool: Idea Analyzer",
     href: "https://jynlab.com",
     label: "jynlab.com",
   },
@@ -285,14 +285,14 @@ function HeroBody({ revealed }: { revealed: number }) {
             JENNY PARK
           </h1>
           <p className="text-2xl text-success">
-            AI Product Manager &amp; Builder
+            AI Product Manager &amp; builder
           </p>
           {r >= 3 && (
             <>
               <p className="text-lg leading-relaxed">
-                Ships AI products 0→1, bridging{" "}
-                <span className="text-accent">growth</span> and{" "}
-                <span className="text-accent">product engineering</span>
+                I ship <span className="text-accent">AI growth tools</span> 0→1
+                and run <span className="text-accent">JYNLAB</span>, an AI growth
+                agency.
               </p>
               <p className="text-dim">// San Jose, CA</p>
             </>
