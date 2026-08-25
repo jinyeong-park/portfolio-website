@@ -38,18 +38,18 @@ const TOOL_COLLAPSE_MS = 220;
 const CHAT_STREAM_MS = 16;
 
 const PROMPTS = [
-  "who is jenny?",
-  "tell me more about her background",
-  "cat skills.txt",
-  "ls projects/",
+  "cat profile.txt",
+  "cat background.md",
+  "cat capabilities.txt",
+  "ls experience/",
   "cat contact.txt",
 ];
 
 const SECTION_TOOLS: string[][] = [
-  ["Reading bio.md", "Loading me.png", "Fetching profile.json"],
+  ["Reading profile.txt", "Loading me.png", "Fetching identity.json"],
   ["Reading background.md", "Fetching experience.json"],
-  ["Parsing skills.json", "Reading tech-stack.md"],
-  ["Fetching projects/", "Loading project metadata", "Resolving links"],
+  ["Parsing capabilities.json", "Reading skills.md"],
+  ["Fetching experience/", "Loading role metadata", "Resolving context"],
   ["Reading contact.txt"],
 ];
 
@@ -58,23 +58,25 @@ const SECTION_TOOLS: string[][] = [
 type BioToken = { word: string; accent?: boolean };
 
 const RAW_BIO: Array<{ text: string; accent?: boolean }> = [
-  { text: "Jenny Park is an " },
-  { text: "AI PM ", accent: true },
+  { text: "Jenny Park bridges " },
+  { text: "client needs", accent: true },
   {
-    text: "and builder. She builds AI tools that turn attention into pipeline, and runs the growth systems behind them.\n\nShe's building ",
+    text: ", stakeholder expectations, and technology — from discovery through implementation.\n\nShe's worked across ",
   },
-  { text: "VerroAgent", accent: true },
+  { text: "SaaS, AI, and data", accent: true },
   {
-    text: ", an AI agent that plans your LinkedIn week. Tell it who you are, and it gives you strategy, angles, and drafts. You just approve.\n\nWhy ",
+    text: " — translating complex business requirements into actionable solutions, aligning cross-functional teams, and driving programs from kickoff to delivery.\n\nAt ",
   },
-  { text: "LinkedIn", accent: true },
-  {
-    text: "? It's where trust compounds. Every post sharpens your thinking, builds your expertise, and turns visibility into pipeline. That's GTM.\n\nShe also runs ",
-  },
+  { text: "SAP", accent: true },
+  { text: ", she aligned stakeholders across Data & AI workstreams. Through " },
   { text: "JYNLAB", accent: true },
-  { text: ", an AI growth agency. JYNLAB builds AI tools and runs growth systems for clients: LinkedIn GTM, content, paid ads, and outbound. (" },
-  { text: "Idea Analyzer", accent: true },
-  { text: ", a free idea-validation tool, lives inside it.)\n\nAI PM who builds and ships. Now building in public." },
+  { text: ", she delivers end-to-end client onboarding and automation. At " },
+  { text: "Hyundai", accent: true },
+  {
+    text: ", she coordinated multi-country analytics across Southeast Asia.\n\nHer technical background isn't her identity — it's her ",
+  },
+  { text: "edge", accent: true },
+  { text: "." },
 ];
 
 const BIO_TOKENS: BioToken[] = RAW_BIO.flatMap((part) =>
@@ -83,96 +85,101 @@ const BIO_TOKENS: BioToken[] = RAW_BIO.flatMap((part) =>
     : (part.text.match(/\S+\s*/g) ?? []).map((w) => ({ word: w })),
 );
 
-const STREAM_UNITS = [4, BIO_TOKENS.length, 5, 5, 4];
-const STREAM_MS = [110, 28, 75, 65, 65];
+const STREAM_UNITS = [4, BIO_TOKENS.length, 6, 4, 4];
+const STREAM_MS = [110, 28, 65, 75, 65];
 
 // ─── Section data ─────────────────────────────────────────────────────────────
 
 const skills = [
   {
-    label: "product",
-    value: "Product Strategy · Roadmapping · PRD · User Research · A/B Testing · GTM",
+    label: "client sol.",
+    value: "Discovery · Requirements Gathering · Onboarding · Implementation · CRM",
   },
   {
-    label: "ai/ml",
-    value: "AI Agents · Prompt Engineering · RAG · Evals · LLM APIs (Claude, GPT, Gemini)",
+    label: "cust. success",
+    value: "Engagement · Relationship Mgmt · Retention · Escalation Handling",
   },
   {
-    label: "engineering",
-    value: "Python · TypeScript · JavaScript · React · Next.js · Node.js · REST APIs · Git",
+    label: "program mgmt",
+    value: "Stakeholder Alignment · Cross-functional Collaboration · Project Coordination · Reporting",
   },
   {
-    label: "growth",
-    value: "LinkedIn GTM · Content Systems · Paid Ads (Meta) · Outbound · Ad Creative Automation · Funnel Optimization",
+    label: "biz analysis",
+    value: "Process Mapping · Workflow Automation · KPI Reporting · Data Analysis",
   },
-  { label: "data", value: "SQL · Funnel Analytics · Cohort Analysis" },
-  { label: "stack", value: "Cursor · Lovable · Cloudflare · Supabase · Vercel" },
+  {
+    label: "industries",
+    value: "SaaS · AI & Data · Intl Development · Healthcare · Adtech",
+  },
+  {
+    label: "// fluency",
+    value: "APIs · SQL · Python · Web Technologies · Cloud Platforms · AI & Automation",
+    dim: true,
+  },
 ];
 
-const projects = [
-  {
-    name: "VerroAgent",
-    description:
-      "AI agent that plans your LinkedIn week: strategy, angles, drafts",
-    href: "https://verroagent.com",
-    label: "verroagent.com",
-  },
-  {
-    name: "Admade",
-    description: "AI-powered ad creative generation platform",
-    href: "https://tryadmade.com",
-    label: "tryadmade.com",
-  },
+const experiences = [
   {
     name: "JYNLAB",
-    description:
-      "AI growth agency: build AI tools & run growth systems. Free tool: Idea Analyzer",
+    role: "Founder",
+    problem: "SMB clients need AI automation without engineering overhead",
+    stakeholders: "SMB owners, freelancers, agency partners",
+    solution: "Client discovery, onboarding, CRM & workflow automation, AI customer engagement",
+    outcome: "End-to-end implementations delivered across multiple client engagements",
     href: "https://jynlab.com",
-    label: "jynlab.com",
   },
   {
-    name: "funnellens",
-    description: "AI funnel diagnostic agent for conversion gaps",
-    href: "https://github.com/jinyeong-park/funnellens",
-    label: "github",
+    name: "SAP",
+    role: "Intern",
+    problem: "Stakeholders lacked visibility into Data & AI workstream progress",
+    stakeholders: "Business leaders, product managers, engineering teams",
+    solution: "Stakeholder alignment, business-to-technical requirements translation, workstream coordination",
+    outcome: "Improved cross-functional communication across Data & AI initiatives",
+    href: null,
   },
   {
-    name: "qrefiner",
-    description: "User-research question refinement (The Mom Test)",
-    href: "https://github.com/jinyeong-park/qrefiner",
-    label: "github",
+    name: "Hyundai",
+    role: "Project Coordinator",
+    problem: "Multi-country operations lacked unified analytics and reporting",
+    stakeholders: "Country offices in Laos, Myanmar, Vietnam; regional leadership",
+    solution: "Analytics consolidation, reporting workflow design, cross-country project coordination",
+    outcome: "Streamlined reporting across Southeast Asian markets",
+    href: null,
   },
   {
-    name: "pm-prd-generator",
-    description: "Automate product requirements docs with LLM",
-    href: "https://github.com/jinyeong-park/pm-prd-generator",
-    label: "github",
+    name: "Forever Clinic",
+    role: "International Partnerships",
+    problem: "Medical tourism needed scalable international referral partnerships",
+    stakeholders: "Tour agencies, international clients, clinic management",
+    solution: "Partnership development, customer acquisition, commission reconciliation, agency coordination",
+    outcome: "Built and managed international referral network",
+    href: null,
   },
 ];
 
 const contacts = [
-  {
-    label: "email",
-    value: "byjennypark@gmail.com",
-    href: "mailto:byjennypark@gmail.com",
-  },
   {
     label: "linkedin",
     value: "/in/jennypark7",
     href: "https://www.linkedin.com/in/jennypark7/",
   },
   {
+    label: "email",
+    value: "byjennypark@gmail.com",
+    href: "mailto:byjennypark@gmail.com",
+  },
+  { label: "web", value: "jynlab.com", href: "https://jynlab.com" },
+  {
     label: "github",
     value: "/jinyeong-park",
     href: "https://github.com/jinyeong-park",
   },
-  { label: "web", value: "jynlab.com", href: "https://jynlab.com" },
 ];
 
 // ─── Chat matching ────────────────────────────────────────────────────────────
 
 const FALLBACK =
-  'No match. Try: "what\'s your tech stack?", "what is JYNLAB?", "how do I hire you?", "where are you based?" — or just email byjennypark@gmail.com.';
+  'No match. Try: "what roles are you targeting?", "what kind of implementations have you led?", "how do I hire you?", "where are you based?" — or just email byjennypark@gmail.com.';
 
 function findAnswer(input: string): string {
   const q = input.trim();
@@ -284,16 +291,19 @@ function HeroBody({ revealed }: { revealed: number }) {
             JENNY PARK
           </h1>
           <p className="text-2xl text-success">
-            AI Product Manager &amp; builder
+            Client Solutions &amp; Implementation
+          </p>
+          <p className="text-sm text-dim">
+            Customer Success · Program Management · SaaS, AI &amp; Data
           </p>
           {r >= 3 && (
             <>
-              <p className="text-lg leading-relaxed">
-                I ship <span className="text-accent">AI growth tools</span> 0→1
-                and run <span className="text-accent">JYNLAB</span>, an AI growth
-                agency.
+              <p className="text-base leading-relaxed max-w-xl">
+                I turn complex customer and business needs into practical solutions —{" "}
+                <span className="text-accent">bridging clients, stakeholders, and technology</span>{" "}
+                from discovery through implementation.
               </p>
-              <p className="text-dim">// San Jose, CA</p>
+              <p className="text-dim text-sm">// San Jose, CA</p>
             </>
           )}
           {r >= 4 && (
@@ -416,49 +426,71 @@ function SkillsBody({
   const cap = Math.min(revealed === Infinity ? 999 : revealed, skills.length);
   return (
     <div className="mt-4 space-y-1.5">
-      {skills.slice(0, cap).map(({ label, value }, idx) => (
-        <div key={label} className="flex gap-4 text-sm sm:text-base">
-          <span className="text-highlight w-24 shrink-0">{label}</span>
-          <span className="text-foreground">
-            {value}
-            {showCursor && idx === cap - 1 && <BlockCursor blinking />}
-          </span>
-        </div>
-      ))}
+      {skills.slice(0, cap).map(({ label, value, dim }, idx) =>
+        dim ? (
+          <div key={label} className="flex gap-4 text-sm sm:text-base pt-1">
+            <span className="text-muted w-24 shrink-0">{label}</span>
+            <span className="text-dim">
+              {value}
+              {showCursor && idx === cap - 1 && <BlockCursor blinking />}
+            </span>
+          </div>
+        ) : (
+          <div key={label} className="flex gap-4 text-sm sm:text-base">
+            <span className="text-highlight w-24 shrink-0">{label}</span>
+            <span className="text-foreground">
+              {value}
+              {showCursor && idx === cap - 1 && <BlockCursor blinking />}
+            </span>
+          </div>
+        ),
+      )}
     </div>
   );
 }
 
-function ProjectsBody({
+function ExperienceBody({
   revealed,
   showCursor,
 }: {
   revealed: number;
   showCursor?: boolean;
 }) {
-  const cap = Math.min(revealed === Infinity ? 999 : revealed, projects.length);
+  const cap = Math.min(revealed === Infinity ? 999 : revealed, experiences.length);
   return (
-    <div className="mt-4 space-y-2">
-      {projects.slice(0, cap).map(({ name, description, href, label }, idx) => (
-        <div
-          key={name}
-          className="flex items-baseline justify-between gap-4 text-sm sm:text-base"
-        >
-          <div className="flex items-baseline gap-0 min-w-0">
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-highlight hover:underline underline-offset-4 shrink-0"
-            >
-              {name}
-            </a>
-            <span className="text-foreground truncate">
-              &nbsp;· {description}
-            </span>
-            {showCursor && idx === cap - 1 && <BlockCursor blinking />}
+    <div className="mt-4 space-y-4">
+      {experiences.slice(0, cap).map(({ name, role, problem, solution, outcome, href }, idx) => (
+        <div key={name} className="space-y-1">
+          <div className="flex items-baseline justify-between gap-4 text-sm sm:text-base">
+            {href ? (
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-highlight hover:underline underline-offset-4"
+              >
+                {name}
+              </a>
+            ) : (
+              <span className="text-highlight">{name}</span>
+            )}
+            <span className="text-muted text-xs shrink-0">{role}</span>
           </div>
-          <span className="text-muted text-xs shrink-0">↗ {label}</span>
+          <div className="pl-3 border-l border-border space-y-0.5 text-xs">
+            <div className="flex gap-3">
+              <span className="text-dim w-16 shrink-0">problem</span>
+              <span className="text-foreground">{problem}</span>
+            </div>
+            <div className="flex gap-3">
+              <span className="text-dim w-16 shrink-0">solution</span>
+              <span className="text-foreground">{solution}</span>
+            </div>
+            <div className="flex gap-3">
+              <span className="text-dim w-16 shrink-0">outcome</span>
+              <span className="text-foreground">{outcome}</span>
+            </div>
+          </div>
+          {showCursor && idx === cap - 1 && <BlockCursor blinking />}
         </div>
       ))}
     </div>
@@ -731,7 +763,7 @@ export default function Home() {
               <SkillsBody revealed={revealed} showCursor={isStream} />
             )}
             {i === 3 && (
-              <ProjectsBody revealed={revealed} showCursor={isStream} />
+              <ExperienceBody revealed={revealed} showCursor={isStream} />
             )}
             {i === 4 && (
               <ContactBody revealed={revealed} showCursor={isStream} />
