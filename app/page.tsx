@@ -58,22 +58,24 @@ const SECTION_TOOLS: string[][] = [
 type BioToken = { word: string; accent?: boolean };
 
 const RAW_BIO: Array<{ text: string; accent?: boolean }> = [
-  { text: "Jenny Park bridges " },
-  { text: "client needs", accent: true },
+  { text: "Jenny Park builds the " },
+  { text: "growth systems", accent: true },
   {
-    text: ", stakeholder expectations, and technology — from discovery through implementation.\n\nShe's worked across ",
+    text: " behind GTM — the campaign operations, marketing ops, and AI-native workflows that turn strategy into pipeline.\n\nShe's worked across ",
   },
   { text: "SaaS, AI, and data", accent: true },
   {
-    text: " — translating complex business requirements into actionable solutions, aligning cross-functional teams, and driving programs from kickoff to delivery.\n\nAt ",
+    text: " — running growth and marketing operations end to end: campaign execution, funnel and attribution reporting, cross-functional alignment, and the tooling that makes it all move faster.\n\nAt ",
   },
   { text: "SAP", accent: true },
   { text: ", she aligned stakeholders across Data & AI workstreams. Through " },
   { text: "JYNLAB", accent: true },
-  { text: ", she delivers end-to-end client onboarding and automation. At " },
+  { text: ", she runs growth and marketing ops for clients — including " },
+  { text: "Admade", accent: true },
+  { text: ", an AI ad-creative tool. At " },
   { text: "Hyundai", accent: true },
   {
-    text: ", she coordinated multi-country analytics across Southeast Asia.\n\nHer technical background isn't her identity — it's her ",
+    text: ", she coordinated multi-country market analytics across Southeast Asia.\n\nHer technical background isn't her identity — it's her ",
   },
   { text: "edge", accent: true },
   { text: "." },
@@ -92,28 +94,28 @@ const STREAM_MS = [110, 28, 65, 75, 65];
 
 const skills = [
   {
-    label: "client sol.",
-    value: "Discovery · Requirements Gathering · Onboarding · Implementation · CRM",
+    label: "growth ops",
+    value: "GTM Strategy · Campaign Management · Marketing Operations · Demand Gen Support",
   },
   {
-    label: "cust. success",
-    value: "Engagement · Relationship Mgmt · Retention · Escalation Handling",
+    label: "partnerships",
+    value: "Partner & Channel Development · Customer Acquisition · Relationship Mgmt",
   },
   {
     label: "program mgmt",
     value: "Stakeholder Alignment · Cross-functional Collaboration · Project Coordination · Reporting",
   },
   {
-    label: "biz analysis",
-    value: "Process Mapping · Workflow Automation · KPI Reporting · Data Analysis",
+    label: "analytics",
+    value: "Funnel & Attribution Analysis · KPI Reporting · Market Research · Data Analysis",
   },
   {
     label: "industries",
-    value: "SaaS · AI & Data · Intl Development · Healthcare · Adtech",
+    value: "SaaS · AI & Data · Adtech · Intl Development · Healthcare",
   },
   {
     label: "// fluency",
-    value: "APIs · SQL · Python · Web Technologies · Cloud Platforms · AI & Automation",
+    value: "APIs · SQL · Python · CRM & Marketing Automation · AI & Automation",
     dim: true,
   },
 ];
@@ -122,10 +124,10 @@ const experiences = [
   {
     name: "JYNLAB",
     role: "Founder",
-    problem: "SMB clients need AI automation without engineering overhead",
+    problem: "SMB clients need growth systems without a full marketing team",
     stakeholders: "SMB owners, freelancers, agency partners",
-    solution: "Client discovery, onboarding, CRM & workflow automation, AI customer engagement",
-    outcome: "End-to-end implementations delivered across multiple client engagements",
+    solution: "GTM setup, campaign & marketing ops, CRM automation, AI ad-creative tooling (Admade)",
+    outcome: "Growth systems delivered across multiple client engagements",
     href: "https://jynlab.com",
   },
   {
@@ -140,19 +142,19 @@ const experiences = [
   {
     name: "Hyundai",
     role: "Project Coordinator",
-    problem: "Multi-country operations lacked unified analytics and reporting",
+    problem: "Multi-country operations lacked unified market analytics and reporting",
     stakeholders: "Country offices in Laos, Myanmar, Vietnam; regional leadership",
     solution: "Analytics consolidation, reporting workflow design, cross-country project coordination",
-    outcome: "Streamlined reporting across Southeast Asian markets",
+    outcome: "Streamlined market reporting across Southeast Asian markets",
     href: null,
   },
   {
     name: "Forever Clinic",
     role: "International Partnerships",
-    problem: "Medical tourism needed scalable international referral partnerships",
+    problem: "Medical tourism needed a scalable acquisition channel beyond direct marketing",
     stakeholders: "Tour agencies, international clients, clinic management",
-    solution: "Partnership development, customer acquisition, commission reconciliation, agency coordination",
-    outcome: "Built and managed international referral network",
+    solution: "Partner/channel development, customer acquisition, commission reconciliation, agency coordination",
+    outcome: "Built and scaled an international referral acquisition channel",
     href: null,
   },
 ];
@@ -179,7 +181,7 @@ const contacts = [
 // ─── Chat matching ────────────────────────────────────────────────────────────
 
 const FALLBACK =
-  'No match. Try: "what roles are you targeting?", "what kind of implementations have you led?", "how do I hire you?", "where are you based?" — or just email byjennypark@gmail.com.';
+  'No match. Try: "what roles are you targeting?", "what growth work have you done?", "how do I hire you?", "where are you based?" — or just email byjennypark@gmail.com.';
 
 function findAnswer(input: string): string {
   const q = input.trim();
@@ -291,17 +293,17 @@ function HeroBody({ revealed }: { revealed: number }) {
             JENNY PARK
           </h1>
           <p className="text-2xl text-success">
-            Client Solutions &amp; Implementation
+            Growth &amp; GTM Operations
           </p>
           <p className="text-sm text-dim">
-            Customer Success · Program Management · SaaS, AI &amp; Data
+            Campaign Management · Marketing Operations · SaaS, AI &amp; Data
           </p>
           {r >= 3 && (
             <>
               <p className="text-base leading-relaxed max-w-xl">
-                I turn complex customer and business needs into practical solutions —{" "}
-                <span className="text-accent">bridging clients, stakeholders, and technology</span>{" "}
-                from discovery through implementation.
+                I build the GTM and campaign systems behind growth —{" "}
+                <span className="text-accent">turning strategy into pipeline</span>{" "}
+                through cross-functional execution and AI-native workflows.
               </p>
               <p className="text-dim text-sm">// San Jose, CA</p>
             </>
