@@ -59,13 +59,13 @@ type BioToken = { word: string; accent?: boolean };
 
 const RAW_BIO: Array<{ text: string; accent?: boolean }> = [
   { text: "Jenny Park turns messy " },
-  { text: "business, product, and marketing data", accent: true },
+  { text: "business, product, and marketing data ", accent: true },
   {
-    text: " into decisions someone can actually act on — then uses a program management background to get a team to actually act on them.\n\nShe's worked across ",
+    text: "into decisions someone can actually act on — then uses a program management background to get a team to actually act on them.\n\nShe's worked across ",
   },
-  { text: "SaaS, AI, and adtech", accent: true },
+  { text: "SaaS, AI, and adtech ", accent: true },
   {
-    text: " — SQL and Python analysis, growth and paid media attribution, and the cross-functional alignment to turn a finding into a shipped change.\n\nAt ",
+    text: "— SQL and Python analysis, growth and paid media attribution, and the cross-functional alignment to turn a finding into a shipped change.\n\nAt ",
   },
   { text: "SAP", accent: true },
   { text: ", she translated business requirements into technical workstreams across Data & AI initiatives. Through " },
@@ -430,7 +430,7 @@ function SkillsBody({
     <div className="mt-4 space-y-1.5">
       {skills.slice(0, cap).map(({ label, value }, idx) => (
         <div key={label} className="flex gap-4 text-sm sm:text-base">
-          <span className="text-highlight w-24 shrink-0">{label}</span>
+          <span className="text-highlight w-32 shrink-0">{label}</span>
           <span className="text-foreground">
             {value}
             {showCursor && idx === cap - 1 && <BlockCursor blinking />}
