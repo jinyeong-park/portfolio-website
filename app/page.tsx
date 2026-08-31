@@ -125,7 +125,7 @@ const experiences = [
     role: "Founder",
     problem: "Growth spend needs a real conversion definition, not platform vanity metrics",
     stakeholders: "SMB owners, freelancers, agency partners",
-    solution: "Google Ads campaigns, SQL/Python attribution analysis, AI-assisted workflow automation, AI ad-creative tooling (Admade)",
+    solution: "Google Ads & Meta Ads campaigns, SQL/Python attribution analysis, AI-assisted workflow automation, AI ad-creative tooling (Admade)",
     outcome: "Real ad spend, real conversion tracking, documented findings — not simulated data",
     href: "https://jynlab.com",
   },
