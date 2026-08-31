@@ -9,7 +9,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Jenny Park",
-  description: "Growth & GTM Operations",
+  description: "Data & Business Analyst & PM | SQL/Python, Growth & Paid Media Analytics",
 };
 
 export default function RootLayout({

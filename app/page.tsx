@@ -58,24 +58,24 @@ const SECTION_TOOLS: string[][] = [
 type BioToken = { word: string; accent?: boolean };
 
 const RAW_BIO: Array<{ text: string; accent?: boolean }> = [
-  { text: "Jenny Park builds the " },
-  { text: "growth systems", accent: true },
+  { text: "Jenny Park turns messy " },
+  { text: "business, product, and marketing data", accent: true },
   {
-    text: " behind GTM — the campaign operations, marketing ops, and AI-native workflows that turn strategy into pipeline.\n\nShe's worked across ",
+    text: " into decisions someone can actually act on — then uses a program management background to get a team to actually act on them.\n\nShe's worked across ",
   },
-  { text: "SaaS, AI, and data", accent: true },
+  { text: "SaaS, AI, and adtech", accent: true },
   {
-    text: " — running growth and marketing operations end to end: campaign execution, funnel and attribution reporting, cross-functional alignment, and the tooling that makes it all move faster.\n\nAt ",
+    text: " — SQL and Python analysis, growth and paid media attribution, and the cross-functional alignment to turn a finding into a shipped change.\n\nAt ",
   },
   { text: "SAP", accent: true },
-  { text: ", she aligned stakeholders across Data & AI workstreams. Through " },
+  { text: ", she translated business requirements into technical workstreams across Data & AI initiatives. Through " },
   { text: "JYNLAB", accent: true },
-  { text: ", she runs growth and marketing ops for clients — including " },
+  { text: ", she runs data and growth analytics for clients — real ad spend, real conversion attribution — including " },
   { text: "Admade", accent: true },
   { text: ", an AI ad-creative tool. At " },
   { text: "Hyundai", accent: true },
   {
-    text: ", she coordinated multi-country market analytics across Southeast Asia.\n\nHer technical background isn't her identity — it's her ",
+    text: ", she coordinated multi-country analytics and reporting across Southeast Asia.\n\nHer technical background isn't her identity — it's her ",
   },
   { text: "edge", accent: true },
   { text: "." },
@@ -94,20 +94,20 @@ const STREAM_MS = [110, 28, 65, 75, 65];
 
 const skills = [
   {
-    label: "growth ops",
-    value: "GTM Strategy · Campaign Management · Marketing Operations · Demand Gen Support",
+    label: "data & biz",
+    value: "SQL · Python · KPI Definition · Root Cause Analysis · Requirements Gathering",
   },
   {
-    label: "partnerships",
-    value: "Partner & Channel Development · Customer Acquisition · Relationship Mgmt",
+    label: "growth",
+    value: "Paid Acquisition · Conversion Attribution · Incrementality Testing · A/B Testing",
   },
   {
     label: "program mgmt",
     value: "Stakeholder Alignment · Cross-functional Collaboration · Project Coordination · Reporting",
   },
   {
-    label: "analytics",
-    value: "Funnel & Attribution Analysis · KPI Reporting · Market Research · Data Analysis",
+    label: "partnerships",
+    value: "Partner & Channel Development · Customer Acquisition · Relationship Mgmt",
   },
   {
     label: "industries",
@@ -115,8 +115,7 @@ const skills = [
   },
   {
     label: "// fluency",
-    value: "APIs · SQL · Python · CRM & Marketing Automation · AI & Automation",
-    dim: true,
+    value: "APIs · SQL · Python · BI & Data Visualization · CRM & Marketing Automation · AI & Automation",
   },
 ];
 
@@ -124,10 +123,10 @@ const experiences = [
   {
     name: "JYNLAB",
     role: "Founder",
-    problem: "SMB clients need growth systems without a full marketing team",
+    problem: "Growth spend needs a real conversion definition, not platform vanity metrics",
     stakeholders: "SMB owners, freelancers, agency partners",
-    solution: "GTM setup, campaign & marketing ops, CRM automation, AI ad-creative tooling (Admade)",
-    outcome: "Growth systems delivered across multiple client engagements",
+    solution: "Google Ads campaigns, SQL/Python attribution analysis, AI-assisted workflow automation, AI ad-creative tooling (Admade)",
+    outcome: "Real ad spend, real conversion tracking, documented findings — not simulated data",
     href: "https://jynlab.com",
   },
   {
@@ -135,17 +134,17 @@ const experiences = [
     role: "Intern",
     problem: "Stakeholders lacked visibility into Data & AI workstream progress",
     stakeholders: "Business leaders, product managers, engineering teams",
-    solution: "Stakeholder alignment, business-to-technical requirements translation, workstream coordination",
+    solution: "Requirements translation between business and technical teams, workstream coordination, reporting",
     outcome: "Improved cross-functional communication across Data & AI initiatives",
     href: null,
   },
   {
     name: "Hyundai",
     role: "Project Coordinator",
-    problem: "Multi-country operations lacked unified market analytics and reporting",
+    problem: "Multi-country operations lacked unified analytics and reporting",
     stakeholders: "Country offices in Laos, Myanmar, Vietnam; regional leadership",
-    solution: "Analytics consolidation, reporting workflow design, cross-country project coordination",
-    outcome: "Streamlined market reporting across Southeast Asian markets",
+    solution: "Analytics consolidation, standardized reporting workflows, cross-country coordination",
+    outcome: "Streamlined reporting across Southeast Asian markets",
     href: null,
   },
   {
@@ -181,7 +180,7 @@ const contacts = [
 // ─── Chat matching ────────────────────────────────────────────────────────────
 
 const FALLBACK =
-  'No match. Try: "what roles are you targeting?", "what growth work have you done?", "how do I hire you?", "where are you based?" — or just email byjennypark@gmail.com.';
+  'No match. Try: "what roles are you targeting?", "what have you built?", "how do I hire you?", "where are you based?" — or just email byjennypark@gmail.com.';
 
 function findAnswer(input: string): string {
   const q = input.trim();
@@ -293,17 +292,18 @@ function HeroBody({ revealed }: { revealed: number }) {
             JENNY PARK
           </h1>
           <p className="text-2xl text-success">
-            Growth &amp; GTM Operations
+            Data &amp; Business Analyst &amp; PM
           </p>
           <p className="text-sm text-dim">
-            Campaign Management · Marketing Operations · SaaS, AI &amp; Data
+            SQL/Python · Growth &amp; Paid Media Analytics
           </p>
           {r >= 3 && (
             <>
               <p className="text-base leading-relaxed max-w-xl">
-                I build the GTM and campaign systems behind growth —{" "}
-                <span className="text-accent">turning strategy into pipeline</span>{" "}
-                through cross-functional execution and AI-native workflows.
+                I turn messy business, product, and marketing data into decisions —{" "}
+                <span className="text-accent">SQL, Python, and AI-native workflows</span>{" "}
+                to find what actually drives the numbers, and the program management
+                background to get a team to act on it.
               </p>
               <p className="text-dim text-sm">// San Jose, CA</p>
             </>
@@ -428,25 +428,15 @@ function SkillsBody({
   const cap = Math.min(revealed === Infinity ? 999 : revealed, skills.length);
   return (
     <div className="mt-4 space-y-1.5">
-      {skills.slice(0, cap).map(({ label, value, dim }, idx) =>
-        dim ? (
-          <div key={label} className="flex gap-4 text-sm sm:text-base pt-1">
-            <span className="text-muted w-24 shrink-0">{label}</span>
-            <span className="text-dim">
-              {value}
-              {showCursor && idx === cap - 1 && <BlockCursor blinking />}
-            </span>
-          </div>
-        ) : (
-          <div key={label} className="flex gap-4 text-sm sm:text-base">
-            <span className="text-highlight w-24 shrink-0">{label}</span>
-            <span className="text-foreground">
-              {value}
-              {showCursor && idx === cap - 1 && <BlockCursor blinking />}
-            </span>
-          </div>
-        ),
-      )}
+      {skills.slice(0, cap).map(({ label, value }, idx) => (
+        <div key={label} className="flex gap-4 text-sm sm:text-base">
+          <span className="text-highlight w-24 shrink-0">{label}</span>
+          <span className="text-foreground">
+            {value}
+            {showCursor && idx === cap - 1 && <BlockCursor blinking />}
+          </span>
+        </div>
+      ))}
     </div>
   );
 }

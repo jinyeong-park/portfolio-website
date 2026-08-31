@@ -1,39 +1,39 @@
 [
   {
     "patterns": ["hello|hi|hey|sup|greetings|howdy"],
-    "answer": "Hey! I'm Jenny's terminal. Ask me about her background, roles she's targeting, growth work she's led, or how to get in touch. Try: \"what roles are you targeting?\" or \"how do I hire you?\""
+    "answer": "Hey! I'm Jenny's terminal. Ask me about her background, roles she's targeting, projects she's built, or how to get in touch. Try: \"what roles are you targeting?\" or \"how do I hire you?\""
   },
   {
     "patterns": ["what roles|targeting|looking for|open to work|job search|seeking|employment|hiring|full.time|new role|new job|is she available"],
-    "answer": "She's targeting Growth Marketing, GTM Operations, Campaign Management, and Marketing Operations roles — ideally at SaaS, AI, or data-forward companies. Connect on LinkedIn at linkedin.com/in/jennypark7 or email byjennypark@gmail.com."
+    "answer": "She's targeting Data Analyst, Business Analyst, Business Operations/Systems Analyst, Program Management, and Growth & Paid Media Analytics roles — ideally at SaaS, AI, or data-forward companies. Connect on LinkedIn at linkedin.com/in/jennypark7 or email byjennypark@gmail.com."
   },
   {
-    "patterns": ["what makes you different|why you|stand out|unique|versus|traditional growth marketer"],
-    "answer": "Most growth candidates come from pure execution or pure analytics. Jenny comes from building the systems underneath growth — she's shipped an AI ad-creative tool (Admade), run GTM and marketing ops for client engagements, and translated business goals into requirements engineering teams can actually build. That combination is rarer than it sounds."
+    "patterns": ["what makes you different|why you|stand out|unique|versus|traditional (data|business) analyst"],
+    "answer": "Most analyst portfolios stop at a dashboard. Jenny's projects test the obvious hypothesis first, and follow the data when it doesn't hold up — see the Loopline project, where 'slow onboarding causes churn' turned out to be mostly wrong, and engagement was the real driver. She also comes from cross-functional program work (SAP, Hyundai), so a finding turns into a shipped decision, not just a chart."
   },
   {
     "patterns": ["why.*not.*engineer|why.*not.*software|why.*move.*away|career change|career transition|why.*engineering|not pursuing.*engineer"],
-    "answer": "My technical background helps me build the tools and dashboards growth work runs on, but my strongest work has consistently been in GTM strategy, campaign operations, and aligning cross-functional teams around a growth goal. That's where I create the most value — and that's what I want to keep doing."
+    "answer": "My technical background (Hack Reactor — Python, SQL, JS) means I can build the analysis or the tracking myself instead of waiting on a data team, but my strongest work has consistently been turning that analysis into a decision a business acts on, and getting the team to actually act on it. That's the work I want to keep doing — analyst and program management, not engineering."
   },
   {
-    "patterns": ["technical background|technical fluency|how.*technical|tech.*help|technical.*paid media|technical.*growth"],
-    "answer": "It means I can build the ad-creative tool, the automation, or the dashboard myself instead of waiting on an engineer — and then use it to run the campaign or report the numbers. I've worked with APIs, SQL, and AI tools directly. That fluency is what makes AI-native marketing ops possible."
+    "patterns": ["technical background|technical fluency|how.*technical|tech.*help|technical.*client|technical.*growth"],
+    "answer": "It means I write my own SQL and Python instead of waiting on a data team, and I've wired up real conversion tracking and attribution myself. See jynlab-growth-attribution-system on GitHub — real Google Ads spend, real conversion definitions, not vanity metrics."
   },
   {
     "patterns": ["paid media|media buying|ad spend|ran ads|roas|cac|ltv|managed budget"],
-    "answer": "To be direct: I haven't personally managed paid ad spend or run media-buying campaigns. My adtech experience is on the builder side — I shipped Admade, an AI ad-creative tool, and run the GTM/marketing ops layer around campaigns (strategy, tooling, reporting, cross-functional alignment) rather than the buying itself."
+    "answer": "To be direct: I'm early here. I'm running my first real Google Ads campaign now — real budget, real conversion tracking and attribution architecture (see jynlab-growth-attribution-system on GitHub) — but I don't have a multi-campaign ROAS/CAC track record yet. What I do have: the SQL/Python attribution methodology built and documented before a dollar was spent, which is the part most media-buying hires skip."
   },
   {
-    "patterns": ["growth.*led|what growth|growth work|gtm.*led|campaigns.*led|programs.*led"],
-    "answer": "At JYNLAB, she built and runs the growth and marketing-ops systems for client engagements — GTM setup, campaign operations, CRM automation, and Admade, an AI ad-creative tool. At SAP, she coordinated Data & AI workstreams across business and technical stakeholders. At Hyundai, she managed multi-country market analytics across Southeast Asia. Different industries, same pattern: build the system, align the people, ship the result."
+    "patterns": ["implementations|what.*led|implementation.*led|what kind of implementation|project.*led|programs.*led|what.*built|projects|growth.*led|gtm.*led|campaigns.*led"],
+    "answer": "Two real projects: Loopline (github.com/jinyeong-park/loopline-saas-analytics) — SQL/Python analysis of a B2B SaaS customer lifecycle, with a root-cause finding that overturns the obvious hypothesis. And jynlab-growth-attribution-system — a real, live Google Ads campaign with real-conversion attribution and incrementality testing, not platform-reported vanity metrics. At SAP she coordinated Data & AI workstreams; at Hyundai she consolidated multi-country analytics across Southeast Asia; at JYNLAB she also shipped Admade, an AI ad-creative tool."
   },
   {
     "patterns": ["stakeholders|work with.*technical|non.technical|cross.functional|how do you work"],
-    "answer": "She starts by mapping who needs what — growth, sales, and engineering stakeholders often define success differently. Then she translates: business goals into requirements, technical constraints into plain language, and both into a plan everyone can execute against. She's done this at SAP, JYNLAB, and Hyundai."
+    "answer": "Question first, not the dashboard someone asked for. Then: pull and validate the data, use SQL/Python to find the real pattern, translate the finding into a specific recommendation with the tradeoffs stated, and use a program-management background to get cross-functional stakeholders to actually act on it. She's done this at SAP, JYNLAB, and Hyundai."
   },
   {
     "patterns": ["industries|what industries|sectors|verticals|experience in"],
-    "answer": "SaaS and AI (JYNLAB, SAP), adtech (JYNLAB/Admade), international development and public sector (Hyundai — Laos, Myanmar, Vietnam), healthcare and medical tourism (Forever Clinic). The common thread is growth systems that need both structure and adaptability."
+    "answer": "SaaS and AI (JYNLAB, SAP), adtech and growth (JYNLAB/Admade), international development and public sector (Hyundai — Laos, Myanmar, Vietnam), healthcare and medical tourism (Forever Clinic). The common thread is messy, cross-functional data that needs a real answer, not just a report."
   },
   {
     "patterns": ["hybrid|remote|in.person|office|location|where are you|city|based|timezone"],
@@ -41,19 +41,19 @@
   },
   {
     "patterns": ["who are you|tell me about yourself|introduce yourself|what's your story|who is jenny"],
-    "answer": "Jenny Park — Growth & GTM Operations professional based in San Jose, CA. She builds the campaign operations, marketing ops, and AI-native workflows that turn strategy into pipeline across SaaS, AI, and adtech. Technical enough to build the tooling herself. Operational enough to run the system end to end."
+    "answer": "Jenny Park — Data & Business Analyst & PM based in San Jose, CA. She turns messy business, product, and marketing data into decisions, using SQL, Python, and AI-native workflows — then uses a program management background to get a team to act on the finding. Technical enough to build the analysis herself. Experienced enough to know a finding only matters once it changes what the business does next."
   },
   {
     "patterns": ["jynlab|automation agency|agency|admade"],
-    "answer": "JYNLAB is Jenny's growth and marketing-ops practice — GTM setup, campaign operations, CRM and workflow automation, and Admade, an AI ad-creative tool built inside it. jynlab.com."
+    "answer": "JYNLAB is Jenny's data and growth analytics practice — real Google Ads spend, real conversion attribution, AI-assisted workflow automation, and Admade, an AI ad-creative tool built inside it. jynlab.com."
   },
   {
     "patterns": ["sap|enterprise|data.*ai|workstream"],
-    "answer": "At SAP, she worked on Data & AI workstreams — aligning business stakeholders with technical teams, translating requirements across both sides, and keeping programs on track. It's where she sharpened her enterprise stakeholder management skills."
+    "answer": "At SAP, she worked on Data & AI workstreams — translating business requirements into technical specs, aligning stakeholders, and keeping programs on track. It's where she sharpened her requirements-gathering and cross-functional analysis skills."
   },
   {
     "patterns": ["hyundai|southeast asia|laos|myanmar|vietnam|analytics|international"],
-    "answer": "At Hyundai, she coordinated multi-country market analytics and reporting workflows across Laos, Myanmar, and Vietnam. Built structure across country offices that didn't have a unified reporting layer — required both project management rigor and cross-cultural communication."
+    "answer": "At Hyundai, she coordinated multi-country analytics and reporting workflows across Laos, Myanmar, and Vietnam. Built a standardized reporting layer across country offices that didn't have one — required both analytical rigor and cross-cultural communication."
   },
   {
     "patterns": ["forever clinic|medical|healthcare|tourism|partnership"],
@@ -65,11 +65,11 @@
   },
   {
     "patterns": ["hire|work together|collaborate|consulting|available|availability"],
-    "answer": "Open to full-time roles in Growth Marketing, GTM Operations, Campaign Management, or Marketing Operations — ideally at a SaaS, AI, or data company. For consulting engagements, email byjennypark@gmail.com with what you're working on."
+    "answer": "Open to full-time roles in Data Analysis, Business Analysis, Business Operations/Systems Analysis, Program Management, or Growth & Paid Media Analytics — ideally at a SaaS, AI, or data company. For consulting engagements, email byjennypark@gmail.com with what you're working on."
   },
   {
     "patterns": ["github|code|projects|open source|repos|build"],
-    "answer": "She's built AI tools (Admade, verroagent, funnellens, qrefiner) and growth automation workflows — github.com/jinyeong-park. These demonstrate technical fluency in service of growth ops, not a desire to be an engineer."
+    "answer": "Two flagship projects: loopline-saas-analytics (SQL/Python B2B SaaS analysis with a real root-cause finding) and jynlab-growth-attribution-system (a real, live Google Ads campaign with real attribution). Plus AI tools like Admade, funnellens, and qrefiner. github.com/jinyeong-park — these demonstrate she can build the analysis and the tracking herself, not just interpret someone else's dashboard."
   },
   {
     "patterns": ["linkedin"],
@@ -77,10 +77,10 @@
   },
   {
     "patterns": ["background|experience|career|history|how did you get here"],
-    "answer": "Her path: international project coordination (Hyundai, SEA) → medical tourism partnerships (Forever Clinic) → enterprise AI programs (SAP) → growth and marketing ops (JYNLAB, Admade). Each role added a new growth lever — market reporting, partner channels, cross-functional alignment, AI-native tooling. The thread is always: build the system, align the people, ship the result."
+    "answer": "Her path: international project coordination (Hyundai, SEA) → medical tourism partnerships (Forever Clinic) → enterprise Data & AI programs (SAP) → data, growth, and program work (JYNLAB, Admade). Each role added a layer of stakeholder and data complexity. The thread: find the real question in the data, and get the team to act on the answer."
   },
   {
     "patterns": ["fun fact|hobbies|hobby|outside work|personal|interests|about you"],
-    "answer": "She tends to understand systems better by building them — which is why she codes. But she's learned that the hardest problems in growth aren't the campaign. They're getting the right people aligned on the right goal at the right time."
+    "answer": "She tends to understand systems better by building them — which is why she codes her own analysis instead of just describing what she'd want a data team to build. But she's learned that the hardest part of any project isn't the SQL — it's checking the obvious hypothesis before you believe it, and getting people aligned on what to do next."
   }
 ]
